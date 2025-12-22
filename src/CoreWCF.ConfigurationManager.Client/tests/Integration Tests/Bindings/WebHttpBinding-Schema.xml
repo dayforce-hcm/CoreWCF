@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<webHttpBinding>
+	<binding name="String"
+		closeTimeout="TimeSpan"                    <!-- Type: TimeSpan; default: 00:01:00; format: hh:mm:ss -->
+		openTimeout="TimeSpan"                     <!-- Type: TimeSpan; default: 00:01:00; format: hh:mm:ss -->
+		receiveTimeout="TimeSpan"                  <!-- Type: TimeSpan; default: 00:01:00; format: hh:mm:ss -->
+		sendTimeout="TimeSpan"                     <!-- Type: TimeSpan; default: 00:01:00; format: hh:mm:ss -->
+
+		allowCookies="Boolean"                     <!-- UNSUPPORTED by CoreWCF `WebHttpBinding`; supported by `WebHttpBindingElement`; Type: Boolean; default: false -->
+		bypassProxyOnLocal="Boolean"               <!-- UNSUPPORTED by CoreWCF `WebHttpBinding`; supported by `WebHttpBindingElement`; Type: Boolean; default: false -->
+		hostNameComparisonMode="StrongWildcard/Exact/WeakWildcard" <!-- UNSUPPORTED by CoreWCF `WebHttpBinding`; supported by `WebHttpBindingElement`; enum: StrongWildcard | Exact | WeakWildcard; default: StrongWildcard -->
+		proxyAddress="URI"                         <!-- UNSUPPORTED by CoreWCF `WebHttpBinding`; supported by `WebHttpBindingElement`; Type: Uri; default: null -->
+		useDefaultWebProxy="Boolean"               <!-- UNSUPPORTED by CoreWCF `WebHttpBinding`; supported by `WebHttpBindingElement`; Type: Boolean; default: True -->
+
+		maxBufferPoolSize="Integer"               <!-- Type: Integer; default: 524288 -->
+		maxBufferSize="Integer"                   <!-- Type: Integer; default: 65536 -->
+		maxReceivedMessageSize="Long"             <!-- Type: Long; default: 65536 -->
+
+		transferMode="Buffered/Streamed/StreamedRequest/StreamedResponse" <!-- enum: Buffered | Streamed | StreamedRequest | StreamedResponse; default: Buffered -->
+		writeEncoding="utf-8/utf-16/windows-1251"     <!-- default: Windows-1252; examples: utf-8 | UTF-16 | Windows-1252 -->
+		>
+		<readerQuotas 
+			maxDepth="Integer"                        <!-- Type: Integer; default: 32 -->
+			maxStringContentLength="Integer"          <!-- Type: Integer; default: 8192 -->
+			maxArrayLength="Integer"                  <!-- Type: Integer; default: 16384 -->
+			maxBytesPerRead="Integer"                 <!-- Type: Integer; default: 4096 -->
+			maxNameTableCharCount="Integer"           <!-- Type: Integer; default: 16384 -->
+		/>
+
+		<security mode="None/Transport/TransportCredentialOnly">                  <!-- enum: None | Transport | TransportCredentialOnly -->
+			<transport
+				clientCredentialType="None/Basic/Digest/Ntlm/Windows/Certificate" <!-- enum: None | Basic | Digest | Ntlm | Windows | Certificate; default: None -->
+				proxyCredentialType="None/Basic/Digest/Ntlm/Windows"              <!-- UNSUPPORTED by CoreWCF; enum: None | Basic | Digest | Ntlm | Windows; default: None -->
+				realm=""                                                          <!-- UNSUPPORTED by CoreWCF; Type: String; default: empty -->
+				>
+				<extendedProtectionPolicy                                         <!-- UNSUPPORTED in CoreWCF -->
+					policyEnforcement="Never|WhenSupported|Always"                <!-- UNSUPPORTED in CoreWCF; enum: Never | WhenSupported | Always; default: Never -->
+					protectionScenario="TransportSelected|TrustedProxy"           <!-- UNSUPPORTED in CoreWCF; enum: TransportSelected | TrustedProxy; default: TransportSelected -->
+				/>
+			</transport>
+		</security>
+	</binding>
+</webHttpBinding>

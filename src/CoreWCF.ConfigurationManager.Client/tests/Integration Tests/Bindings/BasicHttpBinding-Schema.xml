@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<basicHttpBinding>
+	<binding name="String" 
+		<!-- String; optional -->
+		closeTimeout="TimeSpan"					<!-- Type: TimeSpan; default: 00:01:00; format: hh:mm:ss -->
+		openTimeout="TimeSpan"					<!-- Type: TimeSpan; default: 00:01:00; format: hh:mm:ss -->
+		receiveTimeout="TimeSpan"				<!-- Type: TimeSpan; default: 00:10:00; format: hh:mm:ss -->
+		sendTimeout="TimeSpan"					<!-- Type: TimeSpan; default: 00:01:00; format: hh:mm:ss -->
+		allowCookies="false" 					<!-- UNSUPPORTED in CoreWCF; Type: Boolean; default: false; -->
+		bypassProxyOnLocal="false" 				<!-- UNSUPPORTED in CoreWCF; Type: Boolean; default: false; -->
+		hostNameComparisonMode="StrongWildCard/Exact/WeakWildcard"	<!-- UNSUPPORTED in CoreWCF; enum: StrongWildcard | Exact | WeakWildcard; default: StrongWildcard -->
+		maxBufferPoolSize="Integer" 			<!-- Type: Integer; default: 524288; -->
+		maxBufferSize="Integer" 				<!-- Type: Integer; default: 65536;  -->
+		maxReceivedMessageSize="Long" 			<!-- Type: Long; default: 65536; -->
+		messageEncoding="Text/Mtom" 			<!-- enum: Text | Mtom; default: Text -->
+		proxyAddress="URI" 						<!-- Uri; default: null -->
+		textEncoding="utf-8" 					<!-- default: utf-8; examples: utf-8 | UTF-16 | iso-8859-1 -->
+		transferMode="Buffered/Streamed/StreamedRequest/StreamedRespons"	<!-- enum: Buffered | Streamed | StreamedRequest | StreamedResponse; default: Buffered -->
+		useDefaultWebProxy="Boolean" 			<!-- Type: Boolean; type: boolean; default: True -->
+		<readerQuotas maxDepth="32" 			<!-- Type: Integer; default: 32; -->
+		maxStringContentLength="8192" 			<!-- Type: Integer; default: 8192;-->
+		maxArrayLength="16384" 					<!-- Type: Integer; default: 16384;-->
+		maxBytesPerRead="4096" 					<!-- Type: Integer; default: 4096;-->
+		maxNameTableCharCount="16384" 			<!-- Type: Integer; default: 16384;-->
+		/>
+		<security
+			mode="None/Transport/Message/TransportWithMessageCredential/TransportCredentialOnly">
+			<!-- enum: None | Transport | TransportWithMessageCredential | TransportCredentialOnly; Message supported only on .NET Framework -->
+			<transport
+				clientCredentialType="None/Basic/Digest/Ntlm/Windows/Certificate"	 <!-- enum: None | Basic | Digest | Ntlm | Negotiate | Certificate | Windows; default: None -->
+				proxyCredentialType="None/Basic/Digest/Ntlm/Windows" 				 <!-- UNSUPPORTED in CoreWCF; enum: None | Basic | Digest | Ntlm | Negotiate; default: None -->
+				realm=""															 <!-- UNSUPPORTED in CoreWCF; string; default: empty -->
+				>
+				<extendedProtectionPolicy							<!-- UNSUPPORTED in CoreWCF; -->
+				policyEnforcement="Never|WhenSupported|Always"		<!-- UNSUPPORTED in CoreWCF; enum: Never | WhenSupported | Always; default: Never -->
+				protectionScenario="TransportSelected|TrustedProxy"	<!-- UNSUPPORTED in CoreWCF; enum: TransportSelected | TrustedProxy; default: TransportSelected -->
+				/>
+			</transport>
+			<message	
+				clientCredentialType="UserName/Certificate"				
+				algorithmSuite="Basic256/Basic256Sha256/TripleDes/Default" />
+				<!-- enum: None | UserName | Certificate | IssuedToken; default varies by mode -->
+				<!-- enum (examples): Default | Basic256 | TripleDes ; default: Basic256 -->
+		</security>
+	</binding>
+</basicHttpBinding>

@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="metadata">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" />
+							</xsd:sequence>
+							<xsd:attribute name="name" use="required" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="assembly">
+						<xsd:complexType>
+							<xsd:attribute name="alias" type="xsd:string" />
+							<xsd:attribute name="name" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="FileNotFound" xml:space="preserve">
+		<value>File {0} not found.</value>
+	</data>
+	<data name = "CannotAccessFile" xml:space="preserve">
+		<value>Cannot access file {0}.</value>
+	</data>
+	<data name = "ConfigReadOnly" xml:space="preserve">
+	    <value>The configuration is read only.</value>
+  </data>
+	<data name = "ConfigInvalidExtensionType" xml:space="preserve">
+    <value>The '{0}' type must derive from {1} to be used in the {2} collection.</value>
+  </data>
+	<data name = "ConfigDuplicateKey" xml:space="preserve">
+    <value>A child element with the element name '{0}' already exists.  Child elements can only be added once.</value>
+  </data>
+	<data name = "ConfigElementTypeNotAllowed" xml:space="preserve">
+    <value>Extension element '{0}' cannot be added to this element.  Verify that the extension is registered in the extension collection at system.serviceModel/extensions/{1}.</value>
+  </data>
+	<data name = "ConfigInvalidStartValue" xml:space="preserve">
+    <value>Start must be between 0 and {0}. Value passed in is {1}.</value>
+  </data>
+	<data name = "ConfigDuplicateItem" xml:space="preserve">
+    <value>An extension named {0} already appears in the {1}. Extension names must be unique.</value>
+  </data>
+	<data name = "ConfigInvalidExtensionElement" xml:space="preserve">
+    <value>Invalid element in configuration. The extension '{0}' does not derive from correct extension base type '{1}'. </value>
+  </data>
+	<data name = "ConfigInvalidExtensionElementName" xml:space="preserve">
+    <value>Invalid element in configuration. The extension name '{0}' is not registered in the collection at system.serviceModel/extensions/{1}. </value>
+  </data>
+	<data name = "ConfigDuplicateExtensionName" xml:space="preserve">
+    <value> An extension of name '{0}' already appears in extension collection. Extension names must be unique.</value>
+  </data>
+	<data name = "ConfigDuplicateExtensionType" xml:space="preserve">
+    <value>An extension of type '{0}' already appears in extension collection. Extension types must be unique.</value>
+  </data>
+	<data name = "ConfigInvalidType" xml:space="preserve">
+    <value>The type '{0}' registered for extension '{1}' could not be loaded.</value>
+  </data>
+	<data name = "ConfigInvalidClassFactoryValue" xml:space="preserve">
+    <value>The value '{0}' is not a valid instance of type '{1}'.</value>
+  </data>
+	<data name = "ConfigMessageEncodingAlreadyInBinding" xml:space="preserve">
+    <value>Cannot add the message encoding element '{0}'. Another message encoding element already exists in the binding '{1}'. There can only be one message encoding element for each binding.</value>
+  </data>
+	<data name = "ConfigStreamUpgradeElementAlreadyInBinding" xml:space="preserve">
+    <value>Cannot add stream upgrade element '{0}'. Another stream upgrade element already exists in the binding '{1}'. There can only be one stream update element per binding.</value>
+  </data>
+	<data name = "ConfigTransportAlreadyInBinding" xml:space="preserve">
+    <value>Cannot add the transport element '{0}'. Another transport element already exists in the binding '{1}'. There can only be one transport element for each binding.</value>
+  </data>
+	<data name = "ConfigInvalidTypeForBinding" xml:space="preserve">
+    <value>Invalid binding type for binding extension configuration object.  This binding extension manages configuration of binding type '{0}' and cannot act upon type '{1}'.</value>
+  </data>
+	<data name = "ConfigInvalidEncodingValue" xml:space="preserve">
+    <value>{0} is not a valid encoding string for System.Text.Encoding.GetEncoding(string).</value>
+  </data>
+	<data name="ValueMustBePositive" xml:space="preserve">
+    <value>The value of this argument must be positive.</value>
+  </data>
+	<data name ="ConfigInvalidClassInstanceValue" xml:space="preserve">
+    <value>The instance is not a valid configurable value of type '{0}'.</value>
+  </data>
+	<data name = "ConfigXmlElementMustBeSet" xml:space="preserve">
+    <value>The XmlElement must contain XML content.</value>
+  </data>
+	<data name = "ConfigurationSchemaInsuffientForSecurityBindingElementInstance" xml:space="preserve">
+    <value>The configuration schema is insufficient to describe the non-standard configuration of the following security binding element: </value>
+  </data>
+	<data name = "ConfigurationSchemaContainsX509IssuerSerialReference" xml:space="preserve">
+    <value>The wsdl schema that was used to create this configuration file contained a 'RequireIssuerSerialReference' assertion for a X509Token.  This can not be represented in configuration, you will need to programatically adjust the appropriate X509SecurityTokenParameters.X509KeyIdentifierClauseType to X509KeyIdentifierClauseType.IssuerSerial.  The default of X509KeyIdentifierClauseType.Thumbprint will be used, which may cause interop issues.</value>
+  </data>
+	<data name = "SecureConversationNeedsBootstrapSecurity" xml:space="preserve">
+    <value>Cannot create security binding element based on the configuration data. When secure conversation authentication mode is selected, the secure conversation bootstrap binding element must also be specified. </value>
+  </data>
+	<data name = "SecureConversationBootstrapCannotUseSecureConversation" xml:space="preserve">
+    <value>Cannot create security binding element based on configuration data. The secure conversation bootstrap requires another secure conversation which is not supported. </value>
+  </data>
+	<data name="UnknownClientEndpointConfiguration" xml:space="preserve">
+    <value>Could not find client endpoint '{0}' in configured endpoints.</value>
+  </data>
+	<data name="CertificateUnsupportedForHttpTransportCredentialOnly" xml:space="preserve">
+    <value>Certificate-based client authentication is not supported in TransportCredentialOnly security mode. Select the Transport security mode.</value>
+  </data>
+	<data name="JsonOnlySupportsMessageVersionNone" xml:space="preserve">
+    <value>MessageVersion must be set to None in WebMessageEncodingBindingElement. Other message versions are not supported.</value>
+  </data>
+</root>

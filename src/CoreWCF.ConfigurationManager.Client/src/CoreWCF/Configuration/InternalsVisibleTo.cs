@@ -1,0 +1,10 @@
+using System.Runtime.CompilerServices;
+
+// Strong-named friend access for signed test assembly
+[assembly: InternalsVisibleTo("CoreWCF.ConfigurationManager.Client.Tests, PublicKey=0024000004800000940000000602000000240000525341310004000001000100cdf2c0662d7ab9ed20ea1a8013659f058589b0ee55f917f93f341459f392638c0da1a528ea5f6768bbb6d54b9e8b1a7fcf46b5b383f733126e0a1d7f7c19597f2c45237b36ac9fbe3459fd5060ba7381c15152dbe140cf1d137ab33540c1be4fbd9049f3ebc5c5471daf80d21a6456a17f53d73e383051cc899948c9c38cf4bf")]
+
+// Plain friend access for unsigned/local test builds (NETCore/NET w/ PublicSign)
+#if FRIEND_TESTS_NO_KEY
+[assembly: InternalsVisibleTo("CoreWCF.ConfigurationManager.Client.Tests")]
+#endif
+
