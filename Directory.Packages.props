@@ -94,6 +94,9 @@
     <PackageVersion Include="System.ServiceModel.NetNamedPipe" Version="8.1.2" />
     <PackageVersion Include="System.ServiceModel.UnixDomainSocket" Version="8.1.2" />
     <PackageVersion Include="System.ServiceModel.Federation" Version="8.1.2" />
+    <!-- Samples dependencies -->
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
+    <PackageVersion Include="xunit.v3" Version="3.0.0" />
   </ItemGroup>
   <ItemGroup Condition="'$(IsTestProject)' != 'true'">
     <PackageVersion Include="Microsoft.AspNetCore.Connections.Abstractions" Version="2.3.0" />
