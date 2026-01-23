@@ -4,10 +4,10 @@
 using System.Configuration;
 using System.Diagnostics.Contracts;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     /// <summary>
-    /// Binding-related Configuration elements use this base class for WCF-wide commonalities
+    /// Binding-related ConfigurationManager elements use this base class for WCF-wide commonalities
     /// </summary>
     public abstract class ServiceModelConfigurationElement : ConfigurationElement
     {

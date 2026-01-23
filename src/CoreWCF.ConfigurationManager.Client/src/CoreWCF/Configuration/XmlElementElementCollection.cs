@@ -4,7 +4,7 @@
 using System.Configuration;
 using System.Xml;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     [ConfigurationCollection(typeof(XmlElementElement), AddItemName = ConfigurationStrings.XmlElement, CollectionType = ConfigurationElementCollectionType.BasicMap)]
     public sealed class XmlElementElementCollection : ServiceModelConfigurationElementCollection<XmlElementElement>

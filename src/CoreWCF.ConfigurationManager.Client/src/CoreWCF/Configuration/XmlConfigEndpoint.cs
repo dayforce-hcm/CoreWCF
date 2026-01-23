@@ -2,20 +2,18 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using CoreWCF.Channels;
+using System.ServiceModel.Channels;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
-    internal class XmlConfigEndpoint : IXmlConfigEndpoint
+    internal class XmlConfigClientEndpoint : IXmlConfigClientEndpoint
     {
         public Uri Address { get; private set; }
         public Binding Binding { get; private set; }
         public Type Contract { get; private set; }
-        public Type Service { get; private set; }
 
-        public XmlConfigEndpoint(Type service, Type contract, Binding binding, Uri address)
+        public XmlConfigClientEndpoint(Type contract, Binding binding, Uri address)
         {
-            Service = service;
             Contract = contract;
             Binding = binding;
             Address = address;

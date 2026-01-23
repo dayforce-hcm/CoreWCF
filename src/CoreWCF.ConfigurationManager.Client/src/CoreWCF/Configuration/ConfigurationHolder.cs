@@ -3,18 +3,19 @@
 
 using System;
 using System.Collections.Generic;
-using CoreWCF.Channels;
+using System.ServiceModel.Channels;
+using System.ServiceModel.Description;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
-    internal class ConfigurationHolder : IConfigurationHolder
+    public class ConfigurationHolder : IConfigurationHolder
     {
         private readonly IDictionary<string, Binding> _bindings = new Dictionary<string, Binding>();
-        private readonly ISet<ServiceEndpoint> _endpoints = new HashSet<ServiceEndpoint>();
+        private readonly ISet<ClientEndpoint> _clientEndpoints = new HashSet<ClientEndpoint>();
         private readonly IServiceProvider _provider;
         private readonly IBindingFactory _factoryBinding;
 
-        public ISet<ServiceEndpoint> Endpoints => _endpoints;
+        public ISet<ClientEndpoint> ClientEndpoints => _clientEndpoints;
 
         public ConfigurationHolder(IServiceProvider serviceProvider, IBindingFactory factory)
         {
@@ -27,7 +28,7 @@ namespace CoreWCF.Configuration
             _bindings.Add(binding.Name, binding);
         }
 
-        public Binding ResolveBinding(string bindingType, string name, string bindingNamespace = null)
+        public Binding ResolveBinding(string bindingType, string name)
         {
             if (string.IsNullOrEmpty(bindingType))
             {
@@ -44,13 +45,11 @@ namespace CoreWCF.Configuration
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new BindingNotFoundException());
             }
 
-            SetBindingNamespace(bindingNamespace, binding);
-
             return binding;
 
         }
 
-        public IXmlConfigEndpoint GetXmlConfigEndpoint(ServiceEndpoint endpoint)
+        public IXmlConfigClientEndpoint GetXmlConfigClientEndpoint(ClientEndpoint endpoint)
         {
             if (endpoint == null)
             {
@@ -58,33 +57,23 @@ namespace CoreWCF.Configuration
             }
 
             Type contract = ServiceReflector.ResolveTypeFromName(endpoint.Contract);
-            Type service = ServiceReflector.ResolveTypeFromName(endpoint.ServiceName);
-            Binding binding = ResolveBinding(endpoint.Binding, endpoint.BindingConfiguration, endpoint.BindingNamespace);
-            return new XmlConfigEndpoint(service, contract, binding, endpoint.Address);
+            Binding binding = ResolveBinding(endpoint.Binding, endpoint.BindingConfiguration);
+            return new XmlConfigClientEndpoint(contract, binding, endpoint.Address);
         }
 
-        public void AddServiceEndpoint(string name, string serviceName, Uri address, string contract, string bindingType, string bindingName, string bindingNamespace)
+        public void AddClientEndpoint(string name, Uri address, string contract, string bindingType, string bindingName)
         {
-            var endpoint = new ServiceEndpoint
+            var endpoint = new ClientEndpoint
             {
-                ServiceName = serviceName,
                 Address = address,
                 Binding = bindingType,
                 Contract = contract,
                 Name = name,
-                BindingConfiguration = bindingName,
-                BindingNamespace = bindingNamespace
+                BindingConfiguration = bindingName
+                
             };
 
-            _endpoints.Add(endpoint);
-        }
-
-        private static void SetBindingNamespace(string bindingNamespace, Binding binding)
-        {
-            if (binding != null && bindingNamespace != null)
-            {
-                binding.Namespace = bindingNamespace;
-            }
-        }
+            _clientEndpoints.Add(endpoint);
+        }        
     }
 }

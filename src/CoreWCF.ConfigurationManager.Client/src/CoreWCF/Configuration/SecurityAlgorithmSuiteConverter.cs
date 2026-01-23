@@ -4,9 +4,9 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.Design.Serialization;
-using CoreWCF.Security;
+using System.ServiceModel.Security;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     internal class SecurityAlgorithmSuiteConverter : TypeConverter
     {
@@ -42,54 +42,54 @@ namespace CoreWCF.Configuration
                     case ConfigurationStrings.Basic256:
                         retval = SecurityAlgorithmSuite.Basic256;
                         break;
-                    case ConfigurationStrings.Basic192:
-                        retval = SecurityAlgorithmSuite.Basic192;
-                        break;
-                    case ConfigurationStrings.Basic128:
-                        retval = SecurityAlgorithmSuite.Basic128;
-                        break;
+                    //case ConfigurationStrings.Basic192:
+                    //    retval = SecurityAlgorithmSuite.Basic192;
+                    //    break;
+                    //case ConfigurationStrings.Basic128:
+                    //    retval = SecurityAlgorithmSuite.Basic128;
+                    //    break;
                     case ConfigurationStrings.TripleDes:
                         retval = SecurityAlgorithmSuite.TripleDes;
                         break;
-                    case ConfigurationStrings.Basic256Rsa15:
-                        retval = SecurityAlgorithmSuite.Basic256Rsa15;
-                        break;
-                    case ConfigurationStrings.Basic192Rsa15:
-                        retval = SecurityAlgorithmSuite.Basic192Rsa15;
-                        break;
-                    case ConfigurationStrings.Basic128Rsa15:
-                        retval = SecurityAlgorithmSuite.Basic128Rsa15;
-                        break;
-                    case ConfigurationStrings.TripleDesRsa15:
-                        retval = SecurityAlgorithmSuite.TripleDesRsa15;
-                        break;
+                    //case ConfigurationStrings.Basic256Rsa15:
+                    //    retval = SecurityAlgorithmSuite.Basic256Rsa15;
+                    //    break;
+                    //case ConfigurationStrings.Basic192Rsa15:
+                    //    retval = SecurityAlgorithmSuite.Basic192Rsa15;
+                    //    break;
+                    //case ConfigurationStrings.Basic128Rsa15:
+                    //    retval = SecurityAlgorithmSuite.Basic128Rsa15;
+                    //    break;
+                    //case ConfigurationStrings.TripleDesRsa15:
+                    //    retval = SecurityAlgorithmSuite.TripleDesRsa15;
+                    //    break;
                     case ConfigurationStrings.Basic256Sha256:
                         retval = SecurityAlgorithmSuite.Basic256Sha256;
                         break;
-                    case ConfigurationStrings.Basic192Sha256:
-                        retval = SecurityAlgorithmSuite.Basic192Sha256;
-                        break;
-                    case ConfigurationStrings.Basic128Sha256:
-                        retval = SecurityAlgorithmSuite.Basic128Sha256;
-                        break;
-                    case ConfigurationStrings.TripleDesSha256:
-                        retval = SecurityAlgorithmSuite.TripleDesSha256;
-                        break;
-                    case ConfigurationStrings.Basic256Sha256Rsa15:
-                        retval = SecurityAlgorithmSuite.Basic256Sha256Rsa15;
-                        break;
-                    case ConfigurationStrings.Basic192Sha256Rsa15:
-                        retval = SecurityAlgorithmSuite.Basic192Sha256Rsa15;
-                        break;
-                    case ConfigurationStrings.Basic128Sha256Rsa15:
-                        retval = SecurityAlgorithmSuite.Basic128Sha256Rsa15;
-                        break;
-                    case ConfigurationStrings.TripleDesSha256Rsa15:
-                        retval = SecurityAlgorithmSuite.TripleDesSha256Rsa15;
-                        break;
+                    //case ConfigurationStrings.Basic192Sha256:
+                    //    retval = SecurityAlgorithmSuite.Basic192Sha256;
+                    //    break;
+                    //case ConfigurationStrings.Basic128Sha256:
+                    //    retval = SecurityAlgorithmSuite.Basic128Sha256;
+                    //    break;
+                    //case ConfigurationStrings.TripleDesSha256:
+                    //    retval = SecurityAlgorithmSuite.TripleDesSha256;
+                    //    break;
+                    //case ConfigurationStrings.Basic256Sha256Rsa15:
+                    //    retval = SecurityAlgorithmSuite.Basic256Sha256Rsa15;
+                    //    break;
+                    //case ConfigurationStrings.Basic192Sha256Rsa15:
+                    //    retval = SecurityAlgorithmSuite.Basic192Sha256Rsa15;
+                    //    break;
+                    //case ConfigurationStrings.Basic128Sha256Rsa15:
+                    //    retval = SecurityAlgorithmSuite.Basic128Sha256Rsa15;
+                    //    break;
+                    //case ConfigurationStrings.TripleDesSha256Rsa15:
+                    //    retval = SecurityAlgorithmSuite.TripleDesSha256Rsa15;
+                    //    break;
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException(nameof(value),
-                            SR.Format(SR.ConfigInvalidClassFactoryValue, securityAlgorithm, typeof(SecurityAlgorithmSuite).FullName)));
+                        throw new ArgumentOutOfRangeException(nameof(value),
+                            SR.Format(SR.ConfigInvalidClassFactoryValue, securityAlgorithm, typeof(SecurityAlgorithmSuite).FullName));
                 }
                 return retval;
             }
@@ -107,36 +107,36 @@ namespace CoreWCF.Configuration
                     retval = ConfigurationStrings.Default;
                 else if (securityAlgorithm == SecurityAlgorithmSuite.Basic256)
                     retval = ConfigurationStrings.Basic256;
-                else if (securityAlgorithm == SecurityAlgorithmSuite.Basic192)
-                    retval = ConfigurationStrings.Basic192;
-                else if (securityAlgorithm == SecurityAlgorithmSuite.Basic128)
-                    retval = ConfigurationStrings.Basic128;
+                //else if (securityAlgorithm == SecurityAlgorithmSuite.Basic192)
+                //    retval = ConfigurationStrings.Basic192;
+                //else if (securityAlgorithm == SecurityAlgorithmSuite.Basic128)
+                //    retval = ConfigurationStrings.Basic128;
                 else if (securityAlgorithm == SecurityAlgorithmSuite.TripleDes)
                     retval = ConfigurationStrings.TripleDes;
-                else if (securityAlgorithm == SecurityAlgorithmSuite.Basic256Rsa15)
-                    retval = ConfigurationStrings.Basic256Rsa15;
-                else if (securityAlgorithm == SecurityAlgorithmSuite.Basic192Rsa15)
-                    retval = ConfigurationStrings.Basic192Rsa15;
-                else if (securityAlgorithm == SecurityAlgorithmSuite.Basic128Rsa15)
-                    retval = ConfigurationStrings.Basic128Rsa15;
-                else if (securityAlgorithm == SecurityAlgorithmSuite.TripleDesRsa15)
-                    retval = ConfigurationStrings.TripleDesRsa15;
+                //else if (securityAlgorithm == SecurityAlgorithmSuite.Basic256Rsa15)
+                //    retval = ConfigurationStrings.Basic256Rsa15;
+                //else if (securityAlgorithm == SecurityAlgorithmSuite.Basic192Rsa15)
+                //    retval = ConfigurationStrings.Basic192Rsa15;
+                //else if (securityAlgorithm == SecurityAlgorithmSuite.Basic128Rsa15)
+                //    retval = ConfigurationStrings.Basic128Rsa15;
+                //else if (securityAlgorithm == SecurityAlgorithmSuite.TripleDesRsa15)
+                //    retval = ConfigurationStrings.TripleDesRsa15;
                 else if (securityAlgorithm == SecurityAlgorithmSuite.Basic256Sha256)
                     retval = ConfigurationStrings.Basic256Sha256;
-                else if (securityAlgorithm == SecurityAlgorithmSuite.Basic192Sha256)
-                    retval = ConfigurationStrings.Basic192Sha256;
-                else if (securityAlgorithm == SecurityAlgorithmSuite.Basic128Sha256)
-                    retval = ConfigurationStrings.Basic128Sha256;
-                else if (securityAlgorithm == SecurityAlgorithmSuite.TripleDesSha256)
-                    retval = ConfigurationStrings.TripleDesSha256;
-                else if (securityAlgorithm == SecurityAlgorithmSuite.Basic256Sha256Rsa15)
-                    retval = ConfigurationStrings.Basic256Sha256Rsa15;
-                else if (securityAlgorithm == SecurityAlgorithmSuite.Basic192Sha256Rsa15)
-                    retval = ConfigurationStrings.Basic192Sha256Rsa15;
-                else if (securityAlgorithm == SecurityAlgorithmSuite.Basic128Sha256Rsa15)
-                    retval = ConfigurationStrings.Basic128Sha256Rsa15;
-                else if (securityAlgorithm == SecurityAlgorithmSuite.TripleDesSha256Rsa15)
-                    retval = ConfigurationStrings.TripleDesSha256Rsa15;
+                //else if (securityAlgorithm == SecurityAlgorithmSuite.Basic192Sha256)
+                //    retval = ConfigurationStrings.Basic192Sha256;
+                //else if (securityAlgorithm == SecurityAlgorithmSuite.Basic128Sha256)
+                //    retval = ConfigurationStrings.Basic128Sha256;
+                //else if (securityAlgorithm == SecurityAlgorithmSuite.TripleDesSha256)
+                //    retval = ConfigurationStrings.TripleDesSha256;
+                //else if (securityAlgorithm == SecurityAlgorithmSuite.Basic256Sha256Rsa15)
+                //    retval = ConfigurationStrings.Basic256Sha256Rsa15;
+                //else if (securityAlgorithm == SecurityAlgorithmSuite.Basic192Sha256Rsa15)
+                //    retval = ConfigurationStrings.Basic192Sha256Rsa15;
+                //else if (securityAlgorithm == SecurityAlgorithmSuite.Basic128Sha256Rsa15)
+                //    retval = ConfigurationStrings.Basic128Sha256Rsa15;
+                //else if (securityAlgorithm == SecurityAlgorithmSuite.TripleDesSha256Rsa15)
+                //    retval = ConfigurationStrings.TripleDesSha256Rsa15;
                 else
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException(nameof(value),
                         SR.Format(SR.ConfigInvalidClassInstanceValue, typeof(SecurityAlgorithmSuite).FullName)));

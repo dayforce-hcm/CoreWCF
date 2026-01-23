@@ -4,7 +4,7 @@
 using System;
 using System.Configuration;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     internal class ExtensionElement : ConfigurationElement
     {

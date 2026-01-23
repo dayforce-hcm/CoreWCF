@@ -8,12 +8,13 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.ServiceModel.Channels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
-    internal class ConfigurationManagerServiceModelOptions : IConfigureNamedOptions<ServiceModelOptions>
+    internal class ConfigurationManagerServiceModelOptions : IConfigureNamedOptions<ClientModelOptions>
     {
         private readonly Lazy<ServiceModelSectionGroup> _section;
 
@@ -37,11 +38,11 @@ namespace CoreWCF.Configuration
                     basePath = AppContext.BaseDirectory;
                 }
 
-                var configMap = new ExeConfigurationFileMap(Path.Combine(basePath, "CoreWCF.machine.config"))
+                var configMap = new ExeConfigurationFileMap(Path.Combine(basePath, "CoreWCF.ConfigurationManager.Client.config"))
                 {
                     ExeConfigFilename = path
                 };
-                System.Configuration.Configuration configuration = ConfigurationManager.OpenMappedExeConfiguration(configMap, ConfigurationUserLevel.None);
+                System.Configuration.Configuration configuration = System.Configuration.ConfigurationManager.OpenMappedExeConfiguration(configMap, ConfigurationUserLevel.None);
                 var section = ServiceModelSectionGroup.GetSectionGroup(configuration);
 
                 if (section is null)
@@ -53,20 +54,20 @@ namespace CoreWCF.Configuration
             }, true);
         }
 
-        public void Configure(string name, ServiceModelOptions options)
+        public void Configure(string name, ClientModelOptions options)
         {
             Configure(options);
         }
 
-        public void Configure(ServiceModelOptions options)
+        public void Configure(ClientModelOptions options)
         {
             var configHolder = ParseConfig();
-            foreach (var serviceEndPoint in configHolder.Endpoints)
+            foreach (var clientEndPoint in configHolder.ClientEndpoints)
             {
-               IXmlConfigEndpoint configEndpoint = configHolder.GetXmlConfigEndpoint(serviceEndPoint);
-                options.ConfigureService(configEndpoint.Service, serviceConfig =>
+                IXmlConfigClientEndpoint configEndpoint = configHolder.GetXmlConfigClientEndpoint(clientEndPoint);
+                options.ConfigureClientEndpoint(configEndpoint.Contract, endpointConfig =>
                 {
-                    serviceConfig.AddServiceEndpoint(configEndpoint.Contract, configEndpoint.Binding, configEndpoint.Address, null);
+                    endpointConfig.AddClientEndpoint(configEndpoint.Contract, configEndpoint.Binding, configEndpoint.Address);
                 });
             }
         }
@@ -79,31 +80,24 @@ namespace CoreWCF.Configuration
             }
 
             AddBinding(group.Bindings?.BasicHttpBinding.Bindings);
-            AddBinding(group.Bindings?.NetTcpBinding.Bindings);
-            AddBinding(group.Bindings?.NetHttpBinding.Bindings);
-            AddBinding(group.Bindings?.wsHttpBinding.Bindings);
+            //AddBinding(group.Bindings?.NetTcpBinding.Bindings);
+            //AddBinding(group.Bindings?.NetHttpBinding.Bindings);
+            //AddBinding(group.Bindings?.wsHttpBinding.Bindings);
             AddBinding(group.Bindings?.WebHttpBinding.Bindings);
             AddBinding(group.Bindings?.CustomBinding.Bindings);
-            AddEndpoint(group.Services?.Services);
+            AddEndpoint(group.Client?.ClientEndpoints);
         }
 
         private void AddEndpoint(IEnumerable endpoints)
         {
-            foreach (ServiceElement bindingElement in endpoints.OfType<ServiceElement>())
+            foreach (ClientEndpointElement bindingElement in endpoints.OfType<ClientEndpointElement>())
             {
-                string serviceName = bindingElement.Name;
-
-                foreach (ServiceEndpointElement endpoint in bindingElement.Endpoints.OfType<ServiceEndpointElement>())
-                {
-                    _holder.AddServiceEndpoint(
-                        endpoint.Name,
-                        serviceName,
-                        endpoint.Address,
-                        endpoint.Contract,
-                        endpoint.Binding,
-                        endpoint.BindingConfiguration,
-                        endpoint.BindingNamespace);
-                }
+                _holder.AddClientEndpoint(
+                    bindingElement.Name,
+                    bindingElement.Address,
+                    bindingElement.Contract,
+                    bindingElement.Binding,
+                    bindingElement.BindingConfiguration);
             }
         }
 
@@ -111,7 +105,7 @@ namespace CoreWCF.Configuration
         {
             foreach (IStandardBindingElement bindingElement in bindings.OfType<IStandardBindingElement>())
             {
-                Channels.Binding binding = bindingElement.CreateBinding();
+                Binding binding = bindingElement.CreateBinding();
                 _holder.AddBinding(binding);
             }
         }
@@ -121,7 +115,6 @@ namespace CoreWCF.Configuration
             ReadConfigSection(_section.Value);
             return _holder;
         }
-
-
     }
+
 }

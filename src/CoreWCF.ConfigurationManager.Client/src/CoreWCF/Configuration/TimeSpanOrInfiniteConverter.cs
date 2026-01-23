@@ -5,7 +5,7 @@ using System;
 using System.ComponentModel;
 using System.Globalization;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     internal class TimeSpanOrInfiniteConverter : TimeSpanConverter
     {

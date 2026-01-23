@@ -7,7 +7,7 @@ using System.Globalization;
 using System.Threading;
 using CoreWCF.Runtime;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     internal sealed class ExtensionsSection : ConfigurationSection
     {
@@ -32,23 +32,23 @@ namespace CoreWCF.Configuration
             BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.BinaryMessageEncodingSectionName, typeof(BinaryMessageEncodingElement).AssemblyQualifiedName));
             BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.HttpsTransportSectionName, typeof(HttpsTransportElement).AssemblyQualifiedName));
             BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.HttpTransportSectionName, typeof(HttpTransportElement).AssemblyQualifiedName));
-            BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.MtomMessageEncodingSectionName, typeof(MtomMessageEncodingElement).AssemblyQualifiedName));
+            //BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.MtomMessageEncodingSectionName, typeof(MtomMessageEncodingElement).AssemblyQualifiedName));
             BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.SecuritySectionName, typeof(SecurityElement).AssemblyQualifiedName));
-            BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.SslStreamSecuritySectionName, typeof(SslStreamSecurityElement).AssemblyQualifiedName));
-            BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.TcpTransportSectionName, typeof(TcpTransportElement).AssemblyQualifiedName));
+            //BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.SslStreamSecuritySectionName, typeof(SslStreamSecurityElement).AssemblyQualifiedName));
+            //BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.TcpTransportSectionName, typeof(TcpTransportElement).AssemblyQualifiedName));
             BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.TextMessageEncodingSectionName, typeof(TextMessageEncodingElement).AssemblyQualifiedName));
-            BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.WindowsStreamSecuritySectionName, typeof(WindowsStreamSecurityElement).AssemblyQualifiedName));
+            //BindingElementExtensions.Add(new ExtensionElement(ConfigurationStrings.WindowsStreamSecuritySectionName, typeof(WindowsStreamSecurityElement).AssemblyQualifiedName));
         }
 
         private void InitializeBindingExtensions()
         {
             BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.BasicHttpBindingCollectionElementName, typeof(BasicHttpBindingCollectionElement).AssemblyQualifiedName));
             BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.CustomBindingCollectionElementName, typeof(CustomBindingCollectionElement).AssemblyQualifiedName));
-            BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.NetTcpBindingCollectionElementName, typeof(NetTcpBindingCollectionElement).AssemblyQualifiedName));
-            BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.WSHttpBindingCollectionElementName, typeof(WSHttpBindingCollectionElement).AssemblyQualifiedName));
+            //BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.NetTcpBindingCollectionElementName, typeof(NetTcpBindingCollectionElement).AssemblyQualifiedName));
+            //BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.WSHttpBindingCollectionElementName, typeof(WSHttpBindingCollectionElement).AssemblyQualifiedName));
             BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.UdpBindingCollectionElementName, ConfigurationStrings.UdpBindingCollectionElementType));
-            BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.NetHttpBindingCollectionElementName, typeof(NetHttpBindingCollectionElement).AssemblyQualifiedName));
-            BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.WebHttpBindingCollectionElementName, typeof(WebHttpBindingCollectionElement).AssemblyQualifiedName));
+            //BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.NetHttpBindingCollectionElementName, typeof(NetHttpBindingCollectionElement).AssemblyQualifiedName));
+            //BindingExtensions.Add(new ExtensionElement(ConfigurationStrings.WebHttpBindingCollectionElementName, typeof(WebHttpBindingCollectionElement).AssemblyQualifiedName));
         }
 
         public ExtensionsSection()

@@ -6,15 +6,17 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Configuration;
+using System.IdentityModel.Tokens;
 using System.Linq;
+using System.ServiceModel.Channels;
+using System.ServiceModel.Security;
+using System.ServiceModel.Security.Tokens;
 using System.Xml;
-using CoreWCF.Channels;
-using CoreWCF.IdentityModel.Tokens;
 using CoreWCF.Runtime;
-using CoreWCF.Security;
-using CoreWCF.Security.Tokens;
+using SMMessageSecurityVersion = System.ServiceModel.MessageSecurityVersion;
 
-namespace CoreWCF.Configuration
+
+namespace CoreWCF.ConfigurationManager.Client
 {
     public class SecurityElementBase : BindingElementExtensionElement
     {
@@ -113,12 +115,12 @@ namespace CoreWCF.Configuration
             get { return (LocalServiceSecuritySettingsElement)base[ConfigurationStrings.LocalServiceSettings]; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MessageProtectionOrder, DefaultValue = SecurityBindingDefaults.DefaultMessageProtectionOrder)]
-        public MessageProtectionOrder MessageProtectionOrder
-        {
-            get { return (MessageProtectionOrder)base[ConfigurationStrings.MessageProtectionOrder]; }
-            set { base[ConfigurationStrings.MessageProtectionOrder] = value; }
-        }
+        //[ConfigurationProperty(ConfigurationStrings.MessageProtectionOrder, DefaultValue = SecurityBindingDefaults.DefaultMessageProtectionOrder)]
+        //public MessageProtectionOrder MessageProtectionOrder
+        //{
+        //    get { return (MessageProtectionOrder)base[ConfigurationStrings.MessageProtectionOrder]; }
+        //    set { base[ConfigurationStrings.MessageProtectionOrder] = value; }
+        //}
 
         [ConfigurationProperty(ConfigurationStrings.ProtectTokens, DefaultValue = false)]
         public bool ProtectTokens
@@ -129,9 +131,9 @@ namespace CoreWCF.Configuration
 
         [ConfigurationProperty(ConfigurationStrings.MessageSecurityVersion, DefaultValue = ConfigurationStrings.Default)]
         [TypeConverter(typeof(MessageSecurityVersionConverter))]
-        public MessageSecurityVersion MessageSecurityVersion
+        public SMMessageSecurityVersion MessageSecurityVersion
         {
-            get { return (MessageSecurityVersion)base[ConfigurationStrings.MessageSecurityVersion]; }
+            get { return (SMMessageSecurityVersion)base[ConfigurationStrings.MessageSecurityVersion]; }
             set { base[ConfigurationStrings.MessageSecurityVersion] = value; }
         }
 
@@ -172,30 +174,30 @@ namespace CoreWCF.Configuration
                 sbe.KeyEntropyMode = KeyEntropyMode;
             if (PropertyValueOrigin.Default != ElementInformation.Properties[ConfigurationStrings.SecurityHeaderLayout].ValueOrigin)
                 sbe.SecurityHeaderLayout = SecurityHeaderLayout;
-            if (PropertyValueOrigin.Default != ElementInformation.Properties[ConfigurationStrings.RequireDerivedKeys].ValueOrigin)
-                sbe.SetKeyDerivation(RequireDerivedKeys);
-            if (PropertyValueOrigin.Default != ElementInformation.Properties[ConfigurationStrings.AllowInsecureTransport].ValueOrigin)
-                sbe.AllowInsecureTransport = AllowInsecureTransport;
+            //if (PropertyValueOrigin.Default != ElementInformation.Properties[ConfigurationStrings.RequireDerivedKeys].ValueOrigin)
+            //    sbe.SetKeyDerivation(RequireDerivedKeys);
+            //if (PropertyValueOrigin.Default != ElementInformation.Properties[ConfigurationStrings.AllowInsecureTransport].ValueOrigin)
+            //    sbe.AllowInsecureTransport = AllowInsecureTransport;
             if (PropertyValueOrigin.Default != ElementInformation.Properties[ConfigurationStrings.EnableUnsecuredResponse].ValueOrigin)
                 sbe.EnableUnsecuredResponse = EnableUnsecuredResponse;
-            if (PropertyValueOrigin.Default != ElementInformation.Properties[ConfigurationStrings.ProtectTokens].ValueOrigin)
-                sbe.ProtectTokens = ProtectTokens;
+            //if (PropertyValueOrigin.Default != ElementInformation.Properties[ConfigurationStrings.ProtectTokens].ValueOrigin)
+            //    sbe.ProtectTokens = ProtectTokens;
 
 
-            SymmetricSecurityBindingElement ssbe = sbe as SymmetricSecurityBindingElement;
+            //SymmetricSecurityBindingElement ssbe = sbe as SymmetricSecurityBindingElement;
 
-            if (ssbe != null)
-            {
-                if (PropertyValueOrigin.Default != ElementInformation.Properties[ConfigurationStrings.MessageProtectionOrder].ValueOrigin)
-                    ssbe.MessageProtectionOrder = MessageProtectionOrder;
-                if (PropertyValueOrigin.Default != ElementInformation.Properties[ConfigurationStrings.RequireSignatureConfirmation].ValueOrigin)
-                    ssbe.RequireSignatureConfirmation = RequireSignatureConfirmation;
-                SecureConversationSecurityTokenParameters scParameters = ssbe.ProtectionTokenParameters as SecureConversationSecurityTokenParameters;
-                if (scParameters != null)
-                {
-                    scParameters.CanRenewSession = CanRenewSecurityContextToken;
-                }
-            }
+            //if (ssbe != null)
+            //{
+            //    if (PropertyValueOrigin.Default != ElementInformation.Properties[ConfigurationStrings.MessageProtectionOrder].ValueOrigin)
+            //        ssbe.MessageProtectionOrder = MessageProtectionOrder;
+            //    if (PropertyValueOrigin.Default != ElementInformation.Properties[ConfigurationStrings.RequireSignatureConfirmation].ValueOrigin)
+            //        ssbe.RequireSignatureConfirmation = RequireSignatureConfirmation;
+            //    SecureConversationSecurityTokenParameters scParameters = ssbe.ProtectionTokenParameters as SecureConversationSecurityTokenParameters;
+            //    if (scParameters != null)
+            //    {
+            //        scParameters.CanRenewSession = CanRenewSecurityContextToken;
+            //    }
+            //}
 
             //TODO If AsymmetricSecurityBindingElement is added 
             //AsymmetricSecurityBindingElement asbe = sbe as AsymmetricSecurityBindingElement;
@@ -219,14 +221,14 @@ namespace CoreWCF.Configuration
                     SecureConversationSecurityTokenParameters scParameters = tsbe.EndpointSupportingTokenParameters.Endorsing[0] as SecureConversationSecurityTokenParameters;
                     if (scParameters != null)
                     {
-                        scParameters.CanRenewSession = CanRenewSecurityContextToken;
+                        //scParameters.CanRenewSession = CanRenewSecurityContextToken;
                     }
                 }
             }
 
             if (PropertyValueOrigin.Default != ElementInformation.Properties[ConfigurationStrings.LocalServiceSettings].ValueOrigin)
             {
-                LocalServiceSettings.ApplyConfiguration(sbe.LocalServiceSettings);
+                //LocalServiceSettings.ApplyConfiguration(sbe.LocalServiceSettings);
             }
         }
 
@@ -251,8 +253,8 @@ namespace CoreWCF.Configuration
                 IncludeTimestamp = source.IncludeTimestamp;
             if (PropertyValueOrigin.Default != source.ElementInformation.Properties[ConfigurationStrings.IssuedTokenParameters].ValueOrigin)
                 this.IssuedTokenParameters.Copy(source.IssuedTokenParameters);
-            if (PropertyValueOrigin.Default != source.ElementInformation.Properties[ConfigurationStrings.MessageProtectionOrder].ValueOrigin)
-                MessageProtectionOrder = source.MessageProtectionOrder;
+            //if (PropertyValueOrigin.Default != source.ElementInformation.Properties[ConfigurationStrings.MessageProtectionOrder].ValueOrigin)
+            //    MessageProtectionOrder = source.MessageProtectionOrder;
             if (PropertyValueOrigin.Default != source.ElementInformation.Properties[ConfigurationStrings.ProtectTokens].ValueOrigin)
                 ProtectTokens = source.ProtectTokens;
             if (PropertyValueOrigin.Default != source.ElementInformation.Properties[ConfigurationStrings.MessageSecurityVersion].ValueOrigin)
@@ -296,12 +298,12 @@ namespace CoreWCF.Configuration
                 //case AuthenticationMode.IssuedToken:
                 //    result = SecurityBindingElement.CreateIssuedTokenBindingElement(this.IssuedTokenParameters.Create(createTemplateOnly, _templateKeyType));
                 //    break;
-                case AuthenticationMode.IssuedTokenForCertificate:
-                    result = SecurityBindingElement.CreateIssuedTokenForCertificateBindingElement(this.IssuedTokenParameters.Create(createTemplateOnly, _templateKeyType));
-                    break;
-                case AuthenticationMode.IssuedTokenForSslNegotiated:
-                    result = SecurityBindingElement.CreateIssuedTokenForSslBindingElement(this.IssuedTokenParameters.Create(createTemplateOnly, _templateKeyType), this.RequireSecurityContextCancellation);
-                    break;
+                //case AuthenticationMode.IssuedTokenForCertificate:
+                //    result = SecurityBindingElement.CreateIssuedTokenForCertificateBindingElement(this.IssuedTokenParameters.Create(createTemplateOnly, _templateKeyType));
+                //    break;
+                //case AuthenticationMode.IssuedTokenForSslNegotiated:
+                //    result = SecurityBindingElement.CreateIssuedTokenForSslBindingElement(this.IssuedTokenParameters.Create(createTemplateOnly, _templateKeyType), this.RequireSecurityContextCancellation);
+                //    break;
                 case AuthenticationMode.IssuedTokenOverTransport:
                     result = SecurityBindingElement.CreateIssuedTokenOverTransportBindingElement(this.IssuedTokenParameters.Create(createTemplateOnly, _templateKeyType));
                     break;
@@ -332,9 +334,9 @@ namespace CoreWCF.Configuration
                 case AuthenticationMode.UserNameOverTransport:
                     result = SecurityBindingElement.CreateUserNameOverTransportBindingElement();
                     break;
-                case AuthenticationMode.SspiNegotiatedOverTransport:
-                    result = SecurityBindingElement.CreateSspiNegotiationOverTransportBindingElement(RequireSecurityContextCancellation);
-                    break;
+                //case AuthenticationMode.SspiNegotiatedOverTransport:
+                //    result = SecurityBindingElement.CreateSspiNegotiationOverTransportBindingElement(RequireSecurityContextCancellation);
+                //    break;
                 default:
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidEnumArgumentException(nameof(AuthenticationMode), (int)AuthenticationMode, typeof(AuthenticationMode)));
             }
@@ -368,22 +370,23 @@ namespace CoreWCF.Configuration
             if (p1.GetType() != p2.GetType())
                 return false;
 
-            if (p1.InclusionMode != p2.InclusionMode)
-                return false;
+            //if (p1.InclusionMode != p2.InclusionMode)
+            //    return false;
 
             if (skipRequireDerivedKeysComparison == false && p1.RequireDerivedKeys != p2.RequireDerivedKeys)
                 return false;
 
-            if (p1.ReferenceStyle != p2.ReferenceStyle)
-                return false;
+            //if (p1.ReferenceStyle != p2.ReferenceStyle)
+            //    return false;
 
             // mutual ssl and anonymous ssl differ in the client cert requirement
-            if (p1 is SslSecurityTokenParameters)
-            {
-                if (((SslSecurityTokenParameters)p1).RequireClientCertificate != ((SslSecurityTokenParameters)p2).RequireClientCertificate)
-                    return false;
-            }
-            else if (p1 is SecureConversationSecurityTokenParameters)
+            //if (p1 is SslSecurityTokenParameters)
+            //{
+            //    if (((SslSecurityTokenParameters)p1).RequireClientCertificate != ((SslSecurityTokenParameters)p2).RequireClientCertificate)
+            //        return false;
+            //}
+            //else 
+            if (p1 is SecureConversationSecurityTokenParameters)
             {
                 SecureConversationSecurityTokenParameters sc1 = (SecureConversationSecurityTokenParameters)p1;
                 SecureConversationSecurityTokenParameters sc2 = (SecureConversationSecurityTokenParameters)p2;
@@ -391,8 +394,8 @@ namespace CoreWCF.Configuration
                 if (sc1.RequireCancellation != sc2.RequireCancellation)
                     return false;
 
-                if (sc1.CanRenewSession != sc2.CanRenewSession)
-                    return false;
+                //if (sc1.CanRenewSession != sc2.CanRenewSession)
+                //    return false;
 
 
                 if (!AreBindingsMatching(sc1.BootstrapSecurityBindingElement, sc2.BootstrapSecurityBindingElement, exactMessageSecurityVersion))
@@ -471,43 +474,43 @@ namespace CoreWCF.Configuration
             if (!AreTokenParameterCollectionsMatching(b1.EndpointSupportingTokenParameters.Signed, b2.EndpointSupportingTokenParameters.Signed, exactMessageSecurityVersion))
                 return false;
 
-            if (!AreTokenParameterCollectionsMatching(b1.EndpointSupportingTokenParameters.SignedEndorsing, b2.EndpointSupportingTokenParameters.SignedEndorsing, exactMessageSecurityVersion))
-                return false;
+            //if (!AreTokenParameterCollectionsMatching(b1.EndpointSupportingTokenParameters.SignedEndorsing, b2.EndpointSupportingTokenParameters.SignedEndorsing, exactMessageSecurityVersion))
+            //    return false;
 
-            if (b1.OperationSupportingTokenParameters.Count != b2.OperationSupportingTokenParameters.Count)
-                return false;
+            //if (b1.OperationSupportingTokenParameters.Count != b2.OperationSupportingTokenParameters.Count)
+            //    return false;
 
-            foreach (KeyValuePair<string, SupportingTokenParameters> operation1 in b1.OperationSupportingTokenParameters)
-            {
-                if (!b2.OperationSupportingTokenParameters.ContainsKey(operation1.Key))
-                    return false;
+            //foreach (KeyValuePair<string, SupportingTokenParameters> operation1 in b1.OperationSupportingTokenParameters)
+            //{
+            //    if (!b2.OperationSupportingTokenParameters.ContainsKey(operation1.Key))
+            //        return false;
 
-                SupportingTokenParameters stp2 = b2.OperationSupportingTokenParameters[operation1.Key];
+            //    SupportingTokenParameters stp2 = b2.OperationSupportingTokenParameters[operation1.Key];
 
-                if (!AreTokenParameterCollectionsMatching(operation1.Value.Endorsing, stp2.Endorsing, exactMessageSecurityVersion))
-                    return false;
+            //    if (!AreTokenParameterCollectionsMatching(operation1.Value.Endorsing, stp2.Endorsing, exactMessageSecurityVersion))
+            //        return false;
 
-                if (!AreTokenParameterCollectionsMatching(operation1.Value.SignedEncrypted, stp2.SignedEncrypted, exactMessageSecurityVersion))
-                    return false;
+            //    if (!AreTokenParameterCollectionsMatching(operation1.Value.SignedEncrypted, stp2.SignedEncrypted, exactMessageSecurityVersion))
+            //        return false;
 
-                if (!AreTokenParameterCollectionsMatching(operation1.Value.Signed, stp2.Signed, exactMessageSecurityVersion))
-                    return false;
+            //    if (!AreTokenParameterCollectionsMatching(operation1.Value.Signed, stp2.Signed, exactMessageSecurityVersion))
+            //        return false;
 
-                if (!AreTokenParameterCollectionsMatching(operation1.Value.SignedEndorsing, stp2.SignedEndorsing, exactMessageSecurityVersion))
-                    return false;
-            }
+            //    if (!AreTokenParameterCollectionsMatching(operation1.Value.SignedEndorsing, stp2.SignedEndorsing, exactMessageSecurityVersion))
+            //        return false;
+            //}
 
-            SymmetricSecurityBindingElement ssbe1 = b1 as SymmetricSecurityBindingElement;
-            if (ssbe1 != null)
-            {
-                SymmetricSecurityBindingElement ssbe2 = (SymmetricSecurityBindingElement)b2;
+            //SymmetricSecurityBindingElement ssbe1 = b1 as SymmetricSecurityBindingElement;
+            //if (ssbe1 != null)
+            //{
+            //    SymmetricSecurityBindingElement ssbe2 = (SymmetricSecurityBindingElement)b2;
 
-                if (ssbe1.MessageProtectionOrder != ssbe2.MessageProtectionOrder)
-                    return false;
+            //    if (ssbe1.MessageProtectionOrder != ssbe2.MessageProtectionOrder)
+            //        return false;
 
-                if (!AreTokenParametersMatching(ssbe1.ProtectionTokenParameters, ssbe2.ProtectionTokenParameters, false, exactMessageSecurityVersion))
-                    return false;
-            }
+            //    if (!AreTokenParametersMatching(ssbe1.ProtectionTokenParameters, ssbe2.ProtectionTokenParameters, false, exactMessageSecurityVersion))
+            //        return false;
+            //}
 
             //TODO If AsymmetricKey is supported
             //AsymmetricSecurityBindingElement asbe1 = b1 as AsymmetricSecurityBindingElement;
@@ -558,27 +561,27 @@ namespace CoreWCF.Configuration
         {
             bool result;
 
-            if (sbe.OperationSupportingTokenParameters.Count > 0)
+            //if (sbe.OperationSupportingTokenParameters.Count > 0)
                 result = false;
-            else
-            {
-                SetIssuedTokenKeyType(sbe);
+            //else
+            //{
+            //    SetIssuedTokenKeyType(sbe);
 
-                Dictionary<AuthenticationMode, SecurityBindingElement> bindingTemplates = new Dictionary<AuthenticationMode, SecurityBindingElement>();
-                AddBindingTemplates(bindingTemplates);
+            //    Dictionary<AuthenticationMode, SecurityBindingElement> bindingTemplates = new Dictionary<AuthenticationMode, SecurityBindingElement>();
+            //    AddBindingTemplates(bindingTemplates);
 
-                result = false;
-                foreach (AuthenticationMode mode in bindingTemplates.Keys)
-                {
-                    SecurityBindingElement candidate = bindingTemplates[mode];
-                    if (AreBindingsMatching(sbe, candidate))
-                    {
-                        AuthenticationMode = mode;
-                        result = true;
-                        break;
-                    }
-                }
-            }
+            //    result = false;
+            //    foreach (AuthenticationMode mode in bindingTemplates.Keys)
+            //    {
+            //        SecurityBindingElement candidate = bindingTemplates[mode];
+            //        if (AreBindingsMatching(sbe, candidate))
+            //        {
+            //            AuthenticationMode = mode;
+            //            result = true;
+            //            break;
+            //        }
+            //    }
+            //}
 
             return result;
         }
@@ -610,10 +613,10 @@ namespace CoreWCF.Configuration
 
         protected virtual void InitializeNestedTokenParameterSettings(SecurityTokenParameters sp, bool initializeNestedBindings)
         {
-            if (sp is SspiSecurityTokenParameters)
-                SetPropertyValueIfNotDefaultValue(ConfigurationStrings.RequireSecurityContextCancellation, ((SspiSecurityTokenParameters)sp).RequireCancellation);
-            else if (sp is SslSecurityTokenParameters)
-                SetPropertyValueIfNotDefaultValue(ConfigurationStrings.RequireSecurityContextCancellation, ((SslSecurityTokenParameters)sp).RequireCancellation);
+            //if (sp is SspiSecurityTokenParameters)
+            //    SetPropertyValueIfNotDefaultValue(ConfigurationStrings.RequireSecurityContextCancellation, ((SspiSecurityTokenParameters)sp).RequireCancellation);
+            //else if (sp is SslSecurityTokenParameters)
+            //    SetPropertyValueIfNotDefaultValue(ConfigurationStrings.RequireSecurityContextCancellation, ((SslSecurityTokenParameters)sp).RequireCancellation);
             //TODO: Implement IssuedTokenParameters
             //else if (sp is IssuedSecurityTokenParameters)
             //    this.IssuedTokenParameters.InitializeFrom((IssuedSecurityTokenParameters)sp, initializeNestedBindings);
@@ -630,15 +633,15 @@ namespace CoreWCF.Configuration
             // Can't apply default value optimization to properties like DefaultAlgorithmSuite because the defaults are computed at runtime and don't match config defaults
             DefaultAlgorithmSuite = sbe.DefaultAlgorithmSuite;
             IncludeTimestamp = sbe.IncludeTimestamp;
-            if (sbe.MessageSecurityVersion != MessageSecurityVersion.Default)
-            {
+            //if (sbe.MessageSecurityVersion != MessageSecurityVersion.Default)
+            //{
                 MessageSecurityVersion = sbe.MessageSecurityVersion;
-            }
+            //}
             // Still safe to apply the optimization here because the runtime defaults are the same as config defaults in all cases
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.KeyEntropyMode, sbe.KeyEntropyMode);
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.SecurityHeaderLayout, sbe.SecurityHeaderLayout);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ProtectTokens, sbe.ProtectTokens);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.AllowInsecureTransport, sbe.AllowInsecureTransport);
+            //SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ProtectTokens, sbe.ProtectTokens);
+            //SetPropertyValueIfNotDefaultValue(ConfigurationStrings.AllowInsecureTransport, sbe.AllowInsecureTransport);
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.EnableUnsecuredResponse, sbe.EnableUnsecuredResponse);
 
 
@@ -670,47 +673,47 @@ namespace CoreWCF.Configuration
                 }
             }
 
-            SymmetricSecurityBindingElement ssbe = sbe as SymmetricSecurityBindingElement;
-            if (ssbe != null)
-            {
-                SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MessageProtectionOrder, ssbe.MessageProtectionOrder);
-                RequireSignatureConfirmation = ssbe.RequireSignatureConfirmation;
-                if (ssbe.ProtectionTokenParameters != null)
-                {
-                    InitializeNestedTokenParameterSettings(ssbe.ProtectionTokenParameters, initializeNestedBindings);
-                    if (requireDerivedKeys.HasValue && requireDerivedKeys.Value != ssbe.ProtectionTokenParameters.RequireDerivedKeys)
-                        initializationFailure = true;
-                    else
-                        requireDerivedKeys = ssbe.ProtectionTokenParameters.RequireDerivedKeys;
-                }
-            }
-            else
-            {
-                //TODO If AsymmetricKey is supported
-                //AsymmetricSecurityBindingElement asbe = sbe as AsymmetricSecurityBindingElement;
-                //if (asbe != null)
-                //{
-                //    SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MessageProtectionOrder, asbe.MessageProtectionOrder);
-                //    this.RequireSignatureConfirmation = asbe.RequireSignatureConfirmation;
-                //    if (asbe.InitiatorTokenParameters != null)
-                //    {
-                //        this.InitializeNestedTokenParameterSettings(asbe.InitiatorTokenParameters, initializeNestedBindings);
+            //SymmetricSecurityBindingElement ssbe = sbe as SymmetricSecurityBindingElement;
+            //if (ssbe != null)
+            //{
+            //    SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MessageProtectionOrder, ssbe.MessageProtectionOrder);
+            //    RequireSignatureConfirmation = ssbe.RequireSignatureConfirmation;
+            //    if (ssbe.ProtectionTokenParameters != null)
+            //    {
+            //        InitializeNestedTokenParameterSettings(ssbe.ProtectionTokenParameters, initializeNestedBindings);
+            //        if (requireDerivedKeys.HasValue && requireDerivedKeys.Value != ssbe.ProtectionTokenParameters.RequireDerivedKeys)
+            //            initializationFailure = true;
+            //        else
+            //            requireDerivedKeys = ssbe.ProtectionTokenParameters.RequireDerivedKeys;
+            //    }
+            //}
+            //else
+            //{
+            //    //TODO If AsymmetricKey is supported
+            //    //AsymmetricSecurityBindingElement asbe = sbe as AsymmetricSecurityBindingElement;
+            //    //if (asbe != null)
+            //    //{
+            //    //    SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MessageProtectionOrder, asbe.MessageProtectionOrder);
+            //    //    this.RequireSignatureConfirmation = asbe.RequireSignatureConfirmation;
+            //    //    if (asbe.InitiatorTokenParameters != null)
+            //    //    {
+            //    //        this.InitializeNestedTokenParameterSettings(asbe.InitiatorTokenParameters, initializeNestedBindings);
 
-                //        //
-                //        // Copy the derived key token bool flag from the token parameters. The token parameter was set from
-                //        // importing WSDL during SecurityBindingElementImporter.ImportPolicy time
-                //        //
-                //        if (requireDerivedKeys.HasValue && requireDerivedKeys.Value != asbe.InitiatorTokenParameters.RequireDerivedKeys)
-                //            initializationFailure = true;
-                //        else
-                //            requireDerivedKeys = asbe.InitiatorTokenParameters.RequireDerivedKeys;
-                //    }
-                //}
-            }
+            //    //        //
+            //    //        // Copy the derived key token bool flag from the token parameters. The token parameter was set from
+            //    //        // importing WSDL during SecurityBindingElementImporter.ImportPolicy time
+            //    //        //
+            //    //        if (requireDerivedKeys.HasValue && requireDerivedKeys.Value != asbe.InitiatorTokenParameters.RequireDerivedKeys)
+            //    //            initializationFailure = true;
+            //    //        else
+            //    //            requireDerivedKeys = asbe.InitiatorTokenParameters.RequireDerivedKeys;
+            //    //    }
+            //    //}
+            //}
 
             _willX509IssuerReferenceAssertionBeWritten = DoesSecurityBindingElementContainClauseTypeofIssuerSerial(sbe);
             RequireDerivedKeys = requireDerivedKeys.GetValueOrDefault(SecurityBindingDefaults.DefaultRequireDerivedKeys);
-            LocalServiceSettings.InitializeFrom(sbe.LocalServiceSettings);
+            //LocalServiceSettings.InitializeFrom(sbe.LocalServiceSettings);
 
             if (!initializationFailure)
                 initializationFailure = !TryInitializeAuthenticationMode(sbe);
@@ -734,12 +737,12 @@ namespace CoreWCF.Configuration
             if (sbe == null)
                 return false;
 
-            if (sbe is SymmetricSecurityBindingElement)
-            {
-                X509SecurityTokenParameters tokenParamameters = ((SymmetricSecurityBindingElement)sbe).ProtectionTokenParameters as X509SecurityTokenParameters;
-                if (tokenParamameters != null && tokenParamameters.X509ReferenceStyle == X509KeyIdentifierClauseType.IssuerSerial)
-                    return true;
-            }
+            //if (sbe is SymmetricSecurityBindingElement)
+            //{
+            //    X509SecurityTokenParameters tokenParamameters = ((SymmetricSecurityBindingElement)sbe).ProtectionTokenParameters as X509SecurityTokenParameters;
+            //    if (tokenParamameters != null && tokenParamameters.X509ReferenceStyle == X509KeyIdentifierClauseType.IssuerSerial)
+            //        return true;
+            //}
             //TODO if AsymmetricSecurityBindingElement is added
             //else if (sbe is AsymmetricSecurityBindingElement)
             //{
@@ -761,35 +764,35 @@ namespace CoreWCF.Configuration
             if (DoesX509TokenParametersContainClauseTypeofIssuerSerial(sbe.EndpointSupportingTokenParameters.SignedEncrypted))
                 return true;
 
-            if (DoesX509TokenParametersContainClauseTypeofIssuerSerial(sbe.EndpointSupportingTokenParameters.SignedEndorsing))
-                return true;
+            //if (DoesX509TokenParametersContainClauseTypeofIssuerSerial(sbe.EndpointSupportingTokenParameters.SignedEndorsing))
+            //    return true;
 
-            if (DoesX509TokenParametersContainClauseTypeofIssuerSerial(sbe.OptionalEndpointSupportingTokenParameters.Endorsing))
-                return true;
+            //if (DoesX509TokenParametersContainClauseTypeofIssuerSerial(sbe.OptionalEndpointSupportingTokenParameters.Endorsing))
+            //    return true;
 
-            if (DoesX509TokenParametersContainClauseTypeofIssuerSerial(sbe.OptionalEndpointSupportingTokenParameters.Signed))
-                return true;
+            //if (DoesX509TokenParametersContainClauseTypeofIssuerSerial(sbe.OptionalEndpointSupportingTokenParameters.Signed))
+            //    return true;
 
-            if (DoesX509TokenParametersContainClauseTypeofIssuerSerial(sbe.OptionalEndpointSupportingTokenParameters.SignedEncrypted))
-                return true;
+            //if (DoesX509TokenParametersContainClauseTypeofIssuerSerial(sbe.OptionalEndpointSupportingTokenParameters.SignedEncrypted))
+            //    return true;
 
-            if (DoesX509TokenParametersContainClauseTypeofIssuerSerial(sbe.OptionalEndpointSupportingTokenParameters.SignedEndorsing))
-                return true;
+            //if (DoesX509TokenParametersContainClauseTypeofIssuerSerial(sbe.OptionalEndpointSupportingTokenParameters.SignedEndorsing))
+            //    return true;
 
             return false;
         }
 
         private bool DoesX509TokenParametersContainClauseTypeofIssuerSerial(Collection<SecurityTokenParameters> tokenParameters)
         {
-            foreach (SecurityTokenParameters tokenParameter in tokenParameters)
-            {
-                X509SecurityTokenParameters x509TokenParameter = tokenParameter as X509SecurityTokenParameters;
-                if (x509TokenParameter != null)
-                {
-                    if (x509TokenParameter.X509ReferenceStyle == X509KeyIdentifierClauseType.IssuerSerial)
-                        return true;
-                }
-            }
+            //foreach (SecurityTokenParameters tokenParameter in tokenParameters)
+            //{
+            //    X509SecurityTokenParameters x509TokenParameter = tokenParameter as X509SecurityTokenParameters;
+            //    if (x509TokenParameter != null)
+            //    {
+            //        if (x509TokenParameter.X509ReferenceStyle == X509KeyIdentifierClauseType.IssuerSerial)
+            //            return true;
+            //    }
+            //}
 
             return false;
         }

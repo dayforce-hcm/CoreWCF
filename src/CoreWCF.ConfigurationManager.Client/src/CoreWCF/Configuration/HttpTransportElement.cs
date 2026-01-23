@@ -2,12 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.ComponentModel;
 using System.Configuration;
 using System.Net;
-using CoreWCF.Channels;
+using System.ServiceModel.Channels;
+using SMTransferMode =  System.ServiceModel.TransferMode;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     public class HttpTransportElement : TransportElement
     {
@@ -116,10 +116,10 @@ namespace CoreWCF.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.TransferMode, DefaultValue = HttpTransportDefaults.TransferMode)]
-        public TransferMode TransferMode
+        [ConfigurationProperty(ConfigurationStrings.TransferMode, DefaultValue = SMTransferMode.Buffered)]
+        public SMTransferMode TransferMode
         {
-            get { return (TransferMode)base[ConfigurationStrings.TransferMode]; }
+            get { return (SMTransferMode)base[ConfigurationStrings.TransferMode]; }
             set { base[ConfigurationStrings.TransferMode] = value; }
         }
 
@@ -145,12 +145,12 @@ namespace CoreWCF.Configuration
             private set { base[ConfigurationStrings.ExtendedProtectionPolicy] = value; }
         }
         
-        [ConfigurationProperty(ConfigurationStrings.WebSocketSettingsSectionName)]
-        public WebSocketTransportSettingsElement WebSocketSettings
-        {
-            get { return (WebSocketTransportSettingsElement)base[ConfigurationStrings.WebSocketSettingsSectionName]; }
-            set { base[ConfigurationStrings.WebSocketSettingsSectionName] = value; }
-        }
+        //[ConfigurationProperty(ConfigurationStrings.WebSocketSettingsSectionName)]
+        //public WebSocketTransportSettingsElement WebSocketSettings
+        //{
+        //    get { return (WebSocketTransportSettingsElement)base[ConfigurationStrings.WebSocketSettingsSectionName]; }
+        //    set { base[ConfigurationStrings.WebSocketSettingsSectionName] = value; }
+        //}
 
         public override void ApplyConfiguration(BindingElement bindingElement)
         {
@@ -171,13 +171,13 @@ namespace CoreWCF.Configuration
             //binding.MaxPendingAccepts = this.MaxPendingAccepts;
             //binding.ProxyAddress = this.ProxyAddress;
             //binding.ProxyAuthenticationScheme = this.ProxyAuthenticationScheme;
-            binding.Realm = Realm;
+            //binding.Realm = Realm;
             //binding.RequestInitializationTimeout = this.RequestInitializationTimeout;
             binding.TransferMode = TransferMode;
             //binding.UnsafeConnectionNtlmAuthentication = this.UnsafeConnectionNtlmAuthentication;
             //binding.UseDefaultWebProxy = this.UseDefaultWebProxy;
             binding.ExtendedProtectionPolicy = ConfigurationChannelBindingUtility.BuildPolicy(ExtendedProtectionPolicy);
-            WebSocketSettings.ApplyConfiguration(binding.WebSocketSettings);
+            //WebSocketSettings.ApplyConfiguration(binding.WebSocketSettings);
             //if (this.MessageHandlerFactory != null)
             //{
             //    binding.MessageHandlerFactory = HttpMessageHandlerFactory.CreateFromConfigurationElement(this.MessageHandlerFactory);
@@ -204,7 +204,7 @@ namespace CoreWCF.Configuration
             TransferMode = source.TransferMode;
             //this.UnsafeConnectionNtlmAuthentication = source.UnsafeConnectionNtlmAuthentication;
             //this.UseDefaultWebProxy = source.UseDefaultWebProxy;
-            WebSocketSettings = source.WebSocketSettings;
+            //WebSocketSettings = source.WebSocketSettings;
             //this.MessageHandlerFactory = source.MessageHandlerFactory;
             ConfigurationChannelBindingUtility.CopyFrom(source.ExtendedProtectionPolicy, ExtendedProtectionPolicy);
         }
@@ -228,12 +228,12 @@ namespace CoreWCF.Configuration
             //SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxPendingAccepts, source.MaxPendingAccepts);
             //SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ProxyAddress, source.ProxyAddress);
             //SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ProxyAuthenticationScheme, source.ProxyAuthenticationScheme);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.Realm, source.Realm);
+            //SetPropertyValueIfNotDefaultValue(ConfigurationStrings.Realm, source.Realm);
             //SetPropertyValueIfNotDefaultValue(ConfigurationStrings.RequestInitializationTimeout, source.RequestInitializationTimeout);
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.TransferMode, source.TransferMode);
             //SetPropertyValueIfNotDefaultValue(ConfigurationStrings.UnsafeConnectionNtlmAuthentication, source.UnsafeConnectionNtlmAuthentication);
             //SetPropertyValueIfNotDefaultValue(ConfigurationStrings.UseDefaultWebProxy, source.UseDefaultWebProxy);
-            WebSocketSettings.InitializeFrom(source.WebSocketSettings);
+            //WebSocketSettings.InitializeFrom(source.WebSocketSettings);
             //if (source.MessageHandlerFactory != null)
             //{
             //    this.MessageHandlerFactory = source.MessageHandlerFactory.GenerateConfigurationElement();

@@ -6,10 +6,9 @@ using System.Net;
 using System.Net.Security;
 using System.Runtime.InteropServices;
 using System.Security.Authentication.ExtendedProtection;
-using CoreWCF.Channels;
 using CoreWCF.Runtime;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     internal static class ConfigurationChannelBindingUtility
     {
@@ -93,15 +92,15 @@ namespace CoreWCF.Configuration
             return DuplicatedChannelBinding.CreateCopy(source);
         }
 
-        public static void TryAddToMessage(ChannelBinding channelBindingToken, Message message, bool messagePropertyOwnsCleanup)
-        {
-            if (channelBindingToken != null)
-            {
-                ChannelBindingMessageProperty property = new ChannelBindingMessageProperty(channelBindingToken, messagePropertyOwnsCleanup);
-                property.AddTo(message);
-                ((IDisposable)property).Dispose(); //message.Properties.Add() creates a copy...
-            }
-        }
+        //public static void TryAddToMessage(ChannelBinding channelBindingToken, Message message, bool messagePropertyOwnsCleanup)
+        //{
+        //    if (channelBindingToken != null)
+        //    {
+        //        ChannelBindingMessageProperty property = new ChannelBindingMessageProperty(channelBindingToken, messagePropertyOwnsCleanup);
+        //        property.AddTo(message);
+        //        ((IDisposable)property).Dispose(); //message.Properties.Add() creates a copy...
+        //    }
+        //}
 
         //does not validate the ExtendedProtectionPolicy.CustomServiceNames collections on the policies
         public static bool AreEqual(ExtendedProtectionPolicy policy1, ExtendedProtectionPolicy policy2)

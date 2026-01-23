@@ -3,7 +3,7 @@
 
 using System.Configuration;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     public sealed class ServiceModelSectionGroup : ConfigurationSectionGroup
     {
@@ -16,9 +16,9 @@ namespace CoreWCF.Configuration
             get { return (BindingsSection)Sections[ConfigurationStrings.BindingsSectionGroupName]; }
         }
 
-        public ServicesSection Services
+        public ClientSection Client
         {
-            get { return (ServicesSection)Sections[ConfigurationStrings.ServicesSectionName]; }
+            get { return (ClientSection)Sections[ConfigurationStrings.ClientSectionName]; }
         }
 
 

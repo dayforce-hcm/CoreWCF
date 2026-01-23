@@ -4,9 +4,9 @@
 using System;
 using System.ComponentModel;
 using System.Configuration;
-using CoreWCF.Channels;
+using System.ServiceModel.Channels;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     public sealed class CustomBindingElement : NamedServiceModelExtensionCollectionElement<BindingElementExtensionElement>, IDefaultCommunicationTimeouts, IStandardBindingElement
     {
@@ -78,12 +78,12 @@ namespace CoreWCF.Configuration
                     existingElement.ConfigurationElementName,
                     existingElement.GetType().AssemblyQualifiedName)));
             }
-            else if (!CanAddStreamUpgradeElement(element, ref existingElement))
-            {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.Format(SR.ConfigStreamUpgradeElementAlreadyInBinding,
-                    existingElement.ConfigurationElementName,
-                    existingElement.GetType().AssemblyQualifiedName)));
-            }
+            //else if (!CanAddStreamUpgradeElement(element, ref existingElement))
+            //{
+            //    throw new ConfigurationErrorsException(SR.Format(SR.ConfigStreamUpgradeElementAlreadyInBinding,
+            //        existingElement.ConfigurationElementName,
+            //        existingElement.GetType().AssemblyQualifiedName));
+            //}
             else if (!CanAddTransportElement(element, ref existingElement))
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.Format(SR.ConfigTransportAlreadyInBinding,
@@ -126,8 +126,9 @@ namespace CoreWCF.Configuration
             }
 
             BindingElementExtensionElement existingElement = null;
-            return !ContainsKey(element.GetType()) && CanAddEncodingElement(element, ref existingElement) &&
-                CanAddStreamUpgradeElement(element, ref existingElement) && CanAddTransportElement(element, ref existingElement);
+            return !ContainsKey(element.GetType()) && CanAddEncodingElement(element, ref existingElement)
+                //CanAddStreamUpgradeElement(element, ref existingElement) 
+                && CanAddTransportElement(element, ref existingElement);
         }
 
         private bool CanAddEncodingElement(BindingElementExtensionElement element, ref BindingElementExtensionElement existingElement)
@@ -153,10 +154,10 @@ namespace CoreWCF.Configuration
             return retval;
         }
 
-        private bool CanAddStreamUpgradeElement(BindingElementExtensionElement element, ref BindingElementExtensionElement existingElement)
-        {
-            return CanAddExclusiveElement(typeof(StreamUpgradeBindingElement), element.BindingElementType, ref existingElement);
-        }
+        //private bool CanAddStreamUpgradeElement(BindingElementExtensionElement element, ref BindingElementExtensionElement existingElement)
+        //{
+        //    return CanAddExclusiveElement(typeof(StreamUpgradeBindingElement), element.BindingElementType, ref existingElement);
+        //}
 
         private bool CanAddTransportElement(BindingElementExtensionElement element, ref BindingElementExtensionElement existingElement)
         {

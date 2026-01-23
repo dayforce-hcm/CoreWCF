@@ -1,9 +1,11 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using CoreWCF.Channels;
+using System;
+using System.ServiceModel;
+using System.ServiceModel.Channels;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     internal class BindingFactory : IBindingFactory
     {

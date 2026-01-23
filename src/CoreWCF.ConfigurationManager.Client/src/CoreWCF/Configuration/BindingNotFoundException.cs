@@ -3,7 +3,7 @@
 
 using System;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     public class BindingNotFoundException : Exception
     {

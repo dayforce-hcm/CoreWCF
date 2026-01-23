@@ -4,11 +4,11 @@
 using System;
 using System.Configuration;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
-    public class ServiceEndpointElement : ConfigurationElement
+    public class ClientEndpointElement : ConfigurationElement
     {
-        [ConfigurationProperty(ConfigurationStrings.Address, DefaultValue = "", Options = ConfigurationPropertyOptions.IsKey)]
+        [ConfigurationProperty(ConfigurationStrings.Address, DefaultValue = "", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
         public Uri Address
         {
             get { return (Uri)base[ConfigurationStrings.Address]; }
@@ -30,7 +30,7 @@ namespace CoreWCF.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Binding, Options = ConfigurationPropertyOptions.IsKey)]
+        [ConfigurationProperty(ConfigurationStrings.Binding, Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
         [StringValidator(MinLength = 0)]
         public string Binding
         {
@@ -45,7 +45,7 @@ namespace CoreWCF.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.BindingConfiguration, DefaultValue = "", Options = ConfigurationPropertyOptions.IsKey)]
+        [ConfigurationProperty(ConfigurationStrings.BindingConfiguration, DefaultValue = "")]
         [StringValidator(MinLength = 0)]
         public string BindingConfiguration
         {
@@ -60,7 +60,7 @@ namespace CoreWCF.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Name, DefaultValue = "")]
+        [ConfigurationProperty(ConfigurationStrings.Name, DefaultValue = "", Options = ConfigurationPropertyOptions.IsKey)]
         [StringValidator(MinLength = 0)]
         public string Name
         {
@@ -75,37 +75,7 @@ namespace CoreWCF.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.BindingName, DefaultValue = "", Options = ConfigurationPropertyOptions.IsKey)]
-        [StringValidator(MinLength = 0)]
-        public string BindingName
-        {
-            get { return (string)base[ConfigurationStrings.BindingName]; }
-            set
-            {
-                if (string.IsNullOrEmpty(value))
-                {
-                    value = string.Empty;
-                }
-                base[ConfigurationStrings.BindingName] = value;
-            }
-        }
-
-        [ConfigurationProperty(ConfigurationStrings.BindingNamespace, DefaultValue = "", Options = ConfigurationPropertyOptions.IsKey)]
-        [StringValidator(MinLength = 0)]
-        public string BindingNamespace
-        {
-            get { return (string)base[ConfigurationStrings.BindingNamespace]; }
-            set
-            {
-                if (string.IsNullOrEmpty(value))
-                {
-                    value = string.Empty;
-                }
-                base[ConfigurationStrings.BindingNamespace] = value;
-            }
-        }
-
-        [ConfigurationProperty(ConfigurationStrings.Contract, DefaultValue = "", Options = ConfigurationPropertyOptions.IsKey)]
+        [ConfigurationProperty(ConfigurationStrings.Contract, DefaultValue = "", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
         [StringValidator(MinLength = 0)]
         public string Contract
         {
@@ -120,21 +90,7 @@ namespace CoreWCF.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.ListenUri, DefaultValue = null)]
-        public Uri ListenUri
-        {
-            get { return (Uri)base[ConfigurationStrings.ListenUri]; }
-            set { base[ConfigurationStrings.ListenUri] = value; }
-        }
-
-        [ConfigurationProperty(ConfigurationStrings.IsSystemEndpoint, DefaultValue = false)]
-        public bool IsSystemEndpoint
-        {
-            get { return (bool)base[ConfigurationStrings.IsSystemEndpoint]; }
-            set { base[ConfigurationStrings.IsSystemEndpoint] = value; }
-        }
-
-        [ConfigurationProperty(ConfigurationStrings.Kind, DefaultValue = "", Options = ConfigurationPropertyOptions.IsKey)]
+        [ConfigurationProperty(ConfigurationStrings.Kind, DefaultValue = "")]
         [StringValidator(MinLength = 0)]
         public string Kind
         {
@@ -149,7 +105,7 @@ namespace CoreWCF.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.EndpointConfiguration, DefaultValue = "", Options = ConfigurationPropertyOptions.IsKey)]
+        [ConfigurationProperty(ConfigurationStrings.EndpointConfiguration, DefaultValue = "")]
         [StringValidator(MinLength = 0)]
         public string EndpointConfiguration
         {
@@ -163,17 +119,16 @@ namespace CoreWCF.Configuration
                 base[ConfigurationStrings.EndpointConfiguration] = value;
             }
         }
-
-        internal ServiceEndpoint CreateServiceEndpoint()
+       
+        internal ClientEndpoint CreateClientEndpoint()
         {          
-            var endpoint = new ServiceEndpoint()
+            var endpoint = new ClientEndpoint()
             {
                 Name = Name,
                 Address = Address,
                 Binding = Binding,
                 BindingConfiguration = BindingConfiguration,
-                Contract = Contract,
-                BindingNamespace = BindingNamespace
+                Contract = Contract
             };
 
             return endpoint;

@@ -3,8 +3,9 @@
 
 using System;
 using System.Configuration;
+using System.ServiceModel;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     public class HttpTransportSecurityElement : ServiceModelConfigurationElement
     {
@@ -45,8 +46,9 @@ namespace CoreWCF.Configuration
             }
 
             security.ClientCredentialType = ClientCredentialType;
-            security.Realm = Realm;
-           // security.ExtendedProtectionPolicy = ChannelBindingUtility.BuildPolicy(this.ExtendedProtectionPolicy);
+            
+            //security.Realm = Realm;
+            //security.ExtendedProtectionPolicy = ChannelBindingUtility.BuildPolicy(this.ExtendedProtectionPolicy);
         }
     }
 }

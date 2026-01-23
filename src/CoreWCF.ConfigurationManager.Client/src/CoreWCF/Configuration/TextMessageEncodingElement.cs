@@ -4,10 +4,10 @@
 using System;
 using System.ComponentModel;
 using System.Configuration;
+using System.ServiceModel.Channels;
 using System.Text;
-using CoreWCF.Channels;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     public sealed class TextMessageEncodingElement : BindingElementExtensionElement
     {
@@ -17,8 +17,6 @@ namespace CoreWCF.Configuration
             TextMessageEncodingBindingElement binding = (TextMessageEncodingBindingElement)bindingElement;
             binding.MessageVersion = MessageVersion;
             binding.WriteEncoding = WriteEncoding;
-            binding.MaxReadPoolSize = MaxReadPoolSize;
-            binding.MaxWritePoolSize = MaxWritePoolSize;
             ReaderQuotas.ApplyConfiguration(binding.ReaderQuotas);
         }
 
@@ -51,8 +49,6 @@ namespace CoreWCF.Configuration
             TextMessageEncodingBindingElement binding = (TextMessageEncodingBindingElement)bindingElement;
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MessageVersion, binding.MessageVersion);
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.WriteEncoding, binding.WriteEncoding);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxReadPoolSize, binding.MaxReadPoolSize);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxWritePoolSize, binding.MaxWritePoolSize);
             ReaderQuotas.InitializeFrom(binding.ReaderQuotas);
         }
 

@@ -1,16 +1,13 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
+﻿using System.Configuration;
 
-using System.Configuration;
-
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
-    [ConfigurationCollection(typeof(ServiceElement), AddItemName = ConfigurationStrings.Service)]
-    public class ServiceElementCollection : ConfigurationElementCollection
+    [ConfigurationCollection(typeof(ClientElement), AddItemName = ConfigurationStrings.Endpoint)]
+    public class ClientElementCollection : ConfigurationElementCollection
     {
         protected override ConfigurationElement CreateNewElement()
         {
-            return new ServiceElement();
+            return new ClientElement();
         }
 
         protected override object GetElementKey(ConfigurationElement element)
@@ -20,7 +17,7 @@ namespace CoreWCF.Configuration
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(nameof(element));
             }
 
-            return ((ServiceElement)element).Name;
+            return ((ClientElement)element);
         }
     }
 }

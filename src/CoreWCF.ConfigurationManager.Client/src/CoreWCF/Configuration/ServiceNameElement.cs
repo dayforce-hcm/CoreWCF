@@ -3,7 +3,7 @@
 
 using System.Configuration;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     public sealed class ServiceNameElement : ConfigurationElement
     {

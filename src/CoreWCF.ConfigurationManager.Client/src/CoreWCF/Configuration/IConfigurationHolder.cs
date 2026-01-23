@@ -2,18 +2,17 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
-using CoreWCF.Channels;
+using System.ServiceModel.Channels;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     public interface IConfigurationHolder
     {
-        ISet<ServiceEndpoint> Endpoints { get; }
+        ISet<ClientEndpoint> ClientEndpoints { get; }
         void AddBinding(Binding binding);
-        void AddServiceEndpoint(string name, string serviceName, Uri address, string contract, string bindingType, string bindingName, string bindingNamespace);
-        Binding ResolveBinding(string bindingType, string name, string bindingNamespace = null);
-        IXmlConfigEndpoint GetXmlConfigEndpoint(ServiceEndpoint endPoint);
+        void AddClientEndpoint(string name, Uri address, string contract, string bindingType, string bindingName);
+        Binding ResolveBinding(string bindingType, string name);
+        IXmlConfigClientEndpoint GetXmlConfigClientEndpoint(ClientEndpoint endPoint);
     }
 }

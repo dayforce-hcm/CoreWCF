@@ -1,7 +1,7 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     internal static class ConfigurationStrings
     {
@@ -82,6 +82,7 @@ namespace CoreWCF.Configuration
         internal const string ClientCertificate = "clientCertificate";
         internal const string ClientCredentials = "clientCredentials";
         internal const string ClientCredentialType = "clientCredentialType";
+        internal const string ClientEndpointCollectionElementName = "endpoint";
         internal const string ClientSectionName = "client";
         internal const string ClientViaSectionName = "clientVia";
         internal const string CloseIdleServicesAtLowMemory = "closeIdleServicesAtLowMemory";

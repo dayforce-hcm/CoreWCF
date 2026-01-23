@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using CoreWCF.Channels;
+using System.ServiceModel.Channels;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     public abstract class BindingElementExtensionElement : ServiceModelExtensionElement
     {

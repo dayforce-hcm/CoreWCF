@@ -4,9 +4,10 @@
 using System;
 using System.ComponentModel;
 using System.Configuration;
+using System.ServiceModel;
 using System.Text;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     public abstract class HttpBindingBaseElement : StandardBindingElement
     {
@@ -34,7 +35,7 @@ namespace CoreWCF.Configuration
             set { base[ConfigurationStrings.HostNameComparisonMode] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MaxBufferPoolSize, DefaultValue = 65535L)]
+        [ConfigurationProperty(ConfigurationStrings.MaxBufferPoolSize, DefaultValue = 524288L)]
         public long MaxBufferPoolSize
         {
             get { return (long)base[ConfigurationStrings.MaxBufferPoolSize]; }
@@ -55,6 +56,14 @@ namespace CoreWCF.Configuration
             get { return (long)base[ConfigurationStrings.MaxReceivedMessageSize]; }
             set { base[ConfigurationStrings.MaxReceivedMessageSize] = value; }
         }
+
+        [ConfigurationProperty(ConfigurationStrings.MessageEncoding, DefaultValue = "Text")]
+        public string MessageEncoding
+        {
+            get { return (string)base[ConfigurationStrings.MessageEncoding]; }
+            set { base[ConfigurationStrings.MessageEncoding] = value; }
+        }
+
 
         [ConfigurationProperty(ConfigurationStrings.ProxyAddress, DefaultValue = null)]
         public Uri ProxyAddress

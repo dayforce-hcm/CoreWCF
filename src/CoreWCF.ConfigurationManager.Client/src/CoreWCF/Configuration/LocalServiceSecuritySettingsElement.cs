@@ -4,9 +4,9 @@
 using System;
 using System.ComponentModel;
 using System.Configuration;
-using CoreWCF.Channels;
+using System.ServiceModel.Channels;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     public sealed class LocalServiceSecuritySettingsElement : ServiceModelConfigurationElement
     {
@@ -120,50 +120,50 @@ namespace CoreWCF.Configuration
             set { base[ConfigurationStrings.TimestampValidityDuration] = value; }
         }
 
-        internal void ApplyConfiguration(LocalServiceSecuritySettings settings)
-        {
-            if (settings == null)
-            {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(nameof(settings));
-            }
-            if (PropertyValueOrigin.Default != ElementInformation.Properties[ConfigurationStrings.DetectReplays].ValueOrigin)
-                settings.DetectReplays = DetectReplays;
-            settings.IssuedCookieLifetime = IssuedCookieLifetime;
-            settings.MaxClockSkew = MaxClockSkew;
-            settings.MaxPendingSessions = MaxPendingSessions;
-            settings.MaxStatefulNegotiations = MaxStatefulNegotiations;
-            settings.NegotiationTimeout = NegotiationTimeout;
-            settings.ReconnectTransportOnFailure = ReconnectTransportOnFailure;
-            settings.ReplayCacheSize = ReplayCacheSize;
-            settings.ReplayWindow = ReplayWindow;
-            settings.SessionKeyRenewalInterval = SessionKeyRenewalInterval;
-            settings.SessionKeyRolloverInterval = SessionKeyRolloverInterval;
-            settings.InactivityTimeout = InactivityTimeout;
-            settings.TimestampValidityDuration = TimestampValidityDuration;
-            settings.MaxCachedCookies = MaxCachedCookies;
-        }
+        //internal void ApplyConfiguration(LocalServiceSecuritySettings settings)
+        //{
+        //    if (settings == null)
+        //    {
+        //        throw new ArgumentNullException(nameof(settings));
+        //    }
+        //    if (PropertyValueOrigin.Default != ElementInformation.Properties[ConfigurationStrings.DetectReplays].ValueOrigin)
+        //        settings.DetectReplays = DetectReplays;
+        //    settings.IssuedCookieLifetime = IssuedCookieLifetime;
+        //    settings.MaxClockSkew = MaxClockSkew;
+        //    settings.MaxPendingSessions = MaxPendingSessions;
+        //    settings.MaxStatefulNegotiations = MaxStatefulNegotiations;
+        //    settings.NegotiationTimeout = NegotiationTimeout;
+        //    settings.ReconnectTransportOnFailure = ReconnectTransportOnFailure;
+        //    settings.ReplayCacheSize = ReplayCacheSize;
+        //    settings.ReplayWindow = ReplayWindow;
+        //    settings.SessionKeyRenewalInterval = SessionKeyRenewalInterval;
+        //    settings.SessionKeyRolloverInterval = SessionKeyRolloverInterval;
+        //    settings.InactivityTimeout = InactivityTimeout;
+        //    settings.TimestampValidityDuration = TimestampValidityDuration;
+        //    settings.MaxCachedCookies = MaxCachedCookies;
+        //}
 
-        internal void InitializeFrom(LocalServiceSecuritySettings settings)
-        {
-            if (settings == null)
-            {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(nameof(settings));
-            }
-            DetectReplays = settings.DetectReplays; // can't use default value optimization here because runtime default doesn't match config default
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.IssuedCookieLifetime, settings.IssuedCookieLifetime);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxClockSkew, settings.MaxClockSkew);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxPendingSessions, settings.MaxPendingSessions);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxStatefulNegotiations, settings.MaxStatefulNegotiations);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.NegotiationTimeout, settings.NegotiationTimeout);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ReconnectTransportOnFailure, settings.ReconnectTransportOnFailure);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ReplayCacheSize, settings.ReplayCacheSize);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ReplayWindow, settings.ReplayWindow);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.SessionKeyRenewalInterval, settings.SessionKeyRenewalInterval);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.SessionKeyRolloverInterval, settings.SessionKeyRolloverInterval);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.InactivityTimeout, settings.InactivityTimeout);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.TimestampValidityDuration, settings.TimestampValidityDuration);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxCachedCookies, settings.MaxCachedCookies);
-        }
+        //internal void InitializeFrom(LocalServiceSecuritySettings settings)
+        //{
+        //    if (settings == null)
+        //    {
+        //        throw new ArgumentNullException(nameof(settings));
+        //    }
+        //    DetectReplays = settings.DetectReplays; // can't use default value optimization here because runtime default doesn't match config default
+        //    SetPropertyValueIfNotDefaultValue(ConfigurationStrings.IssuedCookieLifetime, settings.IssuedCookieLifetime);
+        //    SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxClockSkew, settings.MaxClockSkew);
+        //    SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxPendingSessions, settings.MaxPendingSessions);
+        //    SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxStatefulNegotiations, settings.MaxStatefulNegotiations);
+        //    SetPropertyValueIfNotDefaultValue(ConfigurationStrings.NegotiationTimeout, settings.NegotiationTimeout);
+        //    SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ReconnectTransportOnFailure, settings.ReconnectTransportOnFailure);
+        //    SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ReplayCacheSize, settings.ReplayCacheSize);
+        //    SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ReplayWindow, settings.ReplayWindow);
+        //    SetPropertyValueIfNotDefaultValue(ConfigurationStrings.SessionKeyRenewalInterval, settings.SessionKeyRenewalInterval);
+        //    SetPropertyValueIfNotDefaultValue(ConfigurationStrings.SessionKeyRolloverInterval, settings.SessionKeyRolloverInterval);
+        //    SetPropertyValueIfNotDefaultValue(ConfigurationStrings.InactivityTimeout, settings.InactivityTimeout);
+        //    SetPropertyValueIfNotDefaultValue(ConfigurationStrings.TimestampValidityDuration, settings.TimestampValidityDuration);
+        //    SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxCachedCookies, settings.MaxCachedCookies);
+        //}
 
         internal void CopyFrom(LocalServiceSecuritySettingsElement source)
         {

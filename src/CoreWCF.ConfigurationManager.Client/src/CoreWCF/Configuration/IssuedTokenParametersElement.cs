@@ -8,11 +8,12 @@ using System.Configuration;
 using System.IO;
 using System.Text;
 using System.Xml;
-using CoreWCF.IdentityModel.Tokens;
+using System.IdentityModel.Tokens;
+using System.ServiceModel.Security.Tokens;
 using CoreWCF.Runtime;
-using CoreWCF.Security.Tokens;
+using SMMessageSecurityVersion= System.ServiceModel.MessageSecurityVersion;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     public sealed class IssuedTokenParametersElement : ServiceModelConfigurationElement
     {
@@ -20,9 +21,9 @@ namespace CoreWCF.Configuration
 
         [ConfigurationProperty(ConfigurationStrings.DefaultMessageSecurityVersion)]
         [TypeConverter(typeof(MessageSecurityVersionConverter))]
-        public MessageSecurityVersion DefaultMessageSecurityVersion
+        public SMMessageSecurityVersion DefaultMessageSecurityVersion
         {
-            get { return (MessageSecurityVersion)base[ConfigurationStrings.DefaultMessageSecurityVersion]; }
+            get { return (SMMessageSecurityVersion)base[ConfigurationStrings.DefaultMessageSecurityVersion]; }
             set { base[ConfigurationStrings.DefaultMessageSecurityVersion] = value; }
         }
 
@@ -118,26 +119,26 @@ namespace CoreWCF.Configuration
             if (parameters == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException(nameof(parameters)));
 
-            if (AdditionalRequestParameters != null)
-            {
-                foreach (XmlElementElement e in AdditionalRequestParameters)
-                {
-                    parameters.AdditionalRequestParameters.Add(e.XmlElement);
-                }
-            }
+            //if (AdditionalRequestParameters != null)
+            //{
+            //    foreach (XmlElementElement e in AdditionalRequestParameters)
+            //    {
+            //        parameters.AdditionalRequestParameters.Add(e.XmlElement);
+            //    }
+            //}
 
-            if (ClaimTypeRequirements != null)
-            {
-                foreach (ClaimTypeElement c in ClaimTypeRequirements)
-                {
-                    parameters.ClaimTypeRequirements.Add(new ClaimTypeRequirement(c.ClaimType, c.IsOptional));
-                }
-            }
+            //if (ClaimTypeRequirements != null)
+            //{
+            //    foreach (ClaimTypeElement c in ClaimTypeRequirements)
+            //    {
+            //        parameters.ClaimTypeRequirements.Add(new ClaimTypeRequirement(c.ClaimType, c.IsOptional));
+            //    }
+            //}
 
-            parameters.KeySize = KeySize;
+            //parameters.KeySize = KeySize;
             parameters.KeyType = this.KeyType;
             parameters.DefaultMessageSecurityVersion = DefaultMessageSecurityVersion;
-            parameters.UseStrTransform = UseStrTransform;
+            //parameters.UseStrTransform = UseStrTransform;
 
             if (!string.IsNullOrEmpty(TokenType))
             {
@@ -228,12 +229,12 @@ namespace CoreWCF.Configuration
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(nameof(source));
 
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.KeyType, source.KeyType);
-            if (source.KeySize > 0)
-            {
-                SetPropertyValueIfNotDefaultValue(ConfigurationStrings.KeySize, source.KeySize);
-            }
+            //if (source.KeySize > 0)
+            //{
+            //    SetPropertyValueIfNotDefaultValue(ConfigurationStrings.KeySize, source.KeySize);
+            //}
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.TokenType, source.TokenType);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.UseStrTransform, source.UseStrTransform);
+            //SetPropertyValueIfNotDefaultValue(ConfigurationStrings.UseStrTransform, source.UseStrTransform);
 
             if (source.IssuerAddress != null)
                 Issuer.InitializeFrom(source.IssuerAddress);
@@ -256,20 +257,20 @@ namespace CoreWCF.Configuration
                 //this.Issuer.Binding = bindingSectionName;
             }
 
-            if (source.IssuerMetadataAddress != null)
-            {
-                IssuerMetadata.InitializeFrom(source.IssuerMetadataAddress);
-            }
+            //if (source.IssuerMetadataAddress != null)
+            //{
+            //    IssuerMetadata.InitializeFrom(source.IssuerMetadataAddress);
+            //}
 
-            foreach (XmlElement element in source.AdditionalRequestParameters)
-            {
-                this.AdditionalRequestParameters.Add(new XmlElementElement(element));
-            }
+            //foreach (XmlElement element in source.AdditionalRequestParameters)
+            //{
+            //    this.AdditionalRequestParameters.Add(new XmlElementElement(element));
+            //}
 
-            foreach (ClaimTypeRequirement c in source.ClaimTypeRequirements)
-            {
-                this.ClaimTypeRequirements.Add(new ClaimTypeElement(c.ClaimType, c.IsOptional));
-            }
+            //foreach (ClaimTypeRequirement c in source.ClaimTypeRequirements)
+            //{
+            //    this.ClaimTypeRequirements.Add(new ClaimTypeElement(c.ClaimType, c.IsOptional));
+            //}
 
             //TODO: Implement IssuedTokenParameters
             //foreach (IssuedSecurityTokenParameters.AlternativeIssuerEndpoint alternativeIssuer in source.AlternativeIssuerEndpoints)

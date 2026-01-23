@@ -4,10 +4,11 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using CoreWCF.Channels;
-using CoreWCF.Security.Tokens;
+using System.ServiceModel.Channels;
+using System.ServiceModel.Security;
+using System.ServiceModel.Security.Tokens;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     public sealed class SecurityElement : SecurityElementBase
     {
@@ -42,7 +43,7 @@ namespace CoreWCF.Configuration
                 if (SecureConversationBootstrap.AuthenticationMode == AuthenticationMode.SecureConversation)
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.Format(SR.SecureConversationBootstrapCannotUseSecureConversation)));
                 SecurityBindingElement bootstrapSecurity = (SecurityBindingElement)SecureConversationBootstrap.CreateBindingElement(createTemplateOnly);
-                result = SecurityBindingElement.CreateSecureConversationBindingElement(bootstrapSecurity, RequireSecurityContextCancellation);
+                result = SecurityBindingElement.CreateSecureConversationBindingElement(bootstrapSecurity);
             }
             else
             {
@@ -63,7 +64,7 @@ namespace CoreWCF.Configuration
         private void InitializeSecureConversationParameters(SecureConversationSecurityTokenParameters sc, bool initializeNestedBindings)
         {
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.RequireSecurityContextCancellation, sc.RequireCancellation);
-            CanRenewSecurityContextToken = sc.CanRenewSession; // can't use default value optimization here because ApplyConfiguration relies on the runtime default instead, which is the opposite of the config default
+            //CanRenewSecurityContextToken = sc.CanRenewSession; // can't use default value optimization here because ApplyConfiguration relies on the runtime default instead, which is the opposite of the config default
             if (sc.BootstrapSecurityBindingElement != null)
             {
                 SecureConversationBootstrap.InitializeFrom(sc.BootstrapSecurityBindingElement, initializeNestedBindings);

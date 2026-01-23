@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.ComponentModel.Design.Serialization;
 using System.Text;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     internal class EncodingConverter : TypeConverter
     {

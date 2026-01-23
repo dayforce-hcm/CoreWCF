@@ -3,14 +3,14 @@
 
 using System.Configuration;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
-    [ConfigurationCollection(typeof(ServiceEndpointElement), AddItemName = ConfigurationStrings.Endpoint)]
-    public class ServiceEndpointElementCollection : ConfigurationElementCollection
+    [ConfigurationCollection(typeof(ClientEndpointElement), AddItemName = ConfigurationStrings.Endpoint)]
+    public class ClientEndpointElementCollection : ConfigurationElementCollection
     {
         protected override ConfigurationElement CreateNewElement()
         {
-            return new ServiceEndpointElement();
+            return new ClientEndpointElement();
         }
 
         protected override object GetElementKey(ConfigurationElement element)
@@ -20,7 +20,7 @@ namespace CoreWCF.Configuration
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(nameof(element));
             }
 
-            return ((ServiceEndpointElement)element).Name;
+            return ((ClientEndpointElement)element).Name;
         }
     }
 }

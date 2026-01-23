@@ -4,10 +4,13 @@
 using System;
 using System.ComponentModel;
 using System.Configuration;
+using System.ServiceModel;
+using System.ServiceModel.Channels;
 using System.Text;
-using CoreWCF.Channels;
+using SMTransferMode = System.ServiceModel.TransferMode;
+using SMHostNameComparisonMode = System.ServiceModel.HostNameComparisonMode;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     public class WebHttpBindingElement : StandardBindingElement
     {
@@ -39,9 +42,9 @@ namespace CoreWCF.Configuration
         }
 
         [ConfigurationProperty(ConfigurationStrings.HostNameComparisonMode, DefaultValue = HttpTransportDefaults.HostNameComparisonMode)]
-        public HostNameComparisonMode HostNameComparisonMode
+        public SMHostNameComparisonMode HostNameComparisonMode
         {
-            get { return (HostNameComparisonMode)base[ConfigurationStrings.HostNameComparisonMode]; }
+            get { return (SMHostNameComparisonMode)base[ConfigurationStrings.HostNameComparisonMode]; }
             set { base[ConfigurationStrings.HostNameComparisonMode] = value; }
         }
 
@@ -89,9 +92,9 @@ namespace CoreWCF.Configuration
         }
 
         [ConfigurationProperty(ConfigurationStrings.TransferMode, DefaultValue = HttpTransportDefaults.TransferMode)]
-        public TransferMode TransferMode
+        public SMTransferMode TransferMode
         {
-            get { return (TransferMode)base[ConfigurationStrings.TransferMode]; }
+            get { return (SMTransferMode)base[ConfigurationStrings.TransferMode]; }
             set { base[ConfigurationStrings.TransferMode] = value; }
         }
 

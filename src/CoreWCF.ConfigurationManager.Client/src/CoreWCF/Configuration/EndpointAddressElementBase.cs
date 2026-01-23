@@ -3,8 +3,9 @@
 
 using System;
 using System.Configuration;
+using SMEndpointAddress = System.ServiceModel.EndpointAddress;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     public class EndpointAddressElementBase : ServiceModelConfigurationElement
     {
@@ -54,7 +55,7 @@ namespace CoreWCF.Configuration
             //}
         }
 
-        public void InitializeFrom(EndpointAddress endpointAddress)
+        public void InitializeFrom(SMEndpointAddress endpointAddress)
         {
             if (null == endpointAddress)
             {

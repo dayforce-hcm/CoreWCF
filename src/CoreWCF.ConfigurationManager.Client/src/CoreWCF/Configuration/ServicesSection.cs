@@ -1,17 +1,14 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
+﻿using System.Configuration;
 
-using System;
-using System.Configuration;
-
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
-    public class ServicesSection : ConfigurationSection
+    public  class ClientSection : ConfigurationSection
     {
         [ConfigurationProperty(ConfigurationStrings.DefaultCollectionName, Options = ConfigurationPropertyOptions.IsDefaultCollection)]
-        public ServiceElementCollection Services
+        public ClientEndpointElementCollection ClientEndpoints
         {
-            get { return (ServiceElementCollection)this[ConfigurationStrings.DefaultCollectionName]; }
+            get { return (ClientEndpointElementCollection)this[ConfigurationStrings.DefaultCollectionName]; }
         }
     }
+    
 }

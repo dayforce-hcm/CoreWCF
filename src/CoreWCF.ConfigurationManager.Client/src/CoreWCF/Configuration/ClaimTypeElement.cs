@@ -3,9 +3,8 @@
 
 using System;
 using System.Configuration;
-using CoreWCF.Security.Tokens;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     public sealed class ClaimTypeElement : ConfigurationElement
     {

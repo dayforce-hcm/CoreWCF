@@ -5,7 +5,7 @@ using System;
 using System.Configuration;
 using System.Xml;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     public sealed class XmlElementElement : ConfigurationElement
     {

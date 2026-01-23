@@ -4,8 +4,10 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.Design.Serialization;
+using System.ServiceModel;
+using SMMessageSecurityVersion = System.ServiceModel.MessageSecurityVersion;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     internal class MessageSecurityVersionConverter : TypeConverter
     {
@@ -32,33 +34,33 @@ namespace CoreWCF.Configuration
             if (value is string)
             {
                 string version = (string)value;
-                MessageSecurityVersion retval;
+                SMMessageSecurityVersion retval;
                 switch (version)
                 {
                     case ConfigurationStrings.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11:
-                        retval = MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11;
+                        retval = SMMessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11;
                         break;
                     case ConfigurationStrings.WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10:
-                        retval = MessageSecurityVersion.WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10;
+                        retval = SMMessageSecurityVersion.WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10;
                         break;
                     case ConfigurationStrings.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10:
-                        retval = MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10;
+                        retval = SMMessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10;
                         break;
-                    case ConfigurationStrings.WSSecurity10WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10:
-                        retval = MessageSecurityVersion.WSSecurity10WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10;
-                        break;
-                    case ConfigurationStrings.WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12:
-                        retval = MessageSecurityVersion.WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12;
-                        break;
+                    //case ConfigurationStrings.WSSecurity10WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10:
+                    //    retval = SMMessageSecurityVersion.WSSecurity10WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10;
+                    //    break;
+                    //case ConfigurationStrings.WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12:
+                    //    retval = SMMessageSecurityVersion.WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12;
+                    //    break;
                     case ConfigurationStrings.WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10:
-                        retval = MessageSecurityVersion.WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10;
+                        retval = SMMessageSecurityVersion.WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10;
                         break;
                     case ConfigurationStrings.Default:
-                        retval = MessageSecurityVersion.Default;
+                        retval = SMMessageSecurityVersion.WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10;
                         break;
                     default:
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value",
-                            SR.Format(SR.ConfigInvalidClassFactoryValue, version, typeof(MessageSecurityVersion).FullName)));
+                            SR.Format(SR.ConfigInvalidClassFactoryValue, version, typeof(SMMessageSecurityVersion).FullName)));
                 }
                 return retval;
             }
@@ -67,42 +69,43 @@ namespace CoreWCF.Configuration
 
         public override object ConvertTo(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType)
         {
-            if (typeof(string) == destinationType && value is MessageSecurityVersion)
+            if (typeof(string) == destinationType && value is SMMessageSecurityVersion)
             {
                 string retval;
-                MessageSecurityVersion securityVersion = (MessageSecurityVersion)value;
-                if (securityVersion == MessageSecurityVersion.Default)
-                {
-                    retval = ConfigurationStrings.Default;
-                }
-                else if (securityVersion == MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11)
+                SMMessageSecurityVersion securityVersion = (SMMessageSecurityVersion)value;
+                //if (securityVersion == MessageSecurityVersion.Default)
+                //{
+                //    retval = ConfigurationStrings.Default;
+                //}
+                //else 
+                if (securityVersion == SMMessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11)
                 {
                     retval = ConfigurationStrings.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11;
                 }
-                else if (securityVersion == MessageSecurityVersion.WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10)
+                else if (securityVersion == SMMessageSecurityVersion.WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10)
                 {
                     retval = ConfigurationStrings.WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10;
                 }
-                else if (securityVersion == MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10)
+                else if (securityVersion == SMMessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10)
                 {
                     retval = ConfigurationStrings.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10;
                 }
-                else if (securityVersion == MessageSecurityVersion.WSSecurity10WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10)
-                {
-                    retval = ConfigurationStrings.WSSecurity10WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10;
-                }
-                else if (securityVersion == MessageSecurityVersion.WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12)
-                {
-                    retval = ConfigurationStrings.WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12;
-                }
-                else if (securityVersion == MessageSecurityVersion.WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10)
+                //else if (securityVersion == MessageSecurityVersion.WSSecurity10WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10)
+                //{
+                //    retval = ConfigurationStrings.WSSecurity10WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10;
+                //}
+                //else if (securityVersion == MessageSecurityVersion.WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12)
+                //{
+                //    retval = ConfigurationStrings.WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12;
+                //}
+                else if (securityVersion == SMMessageSecurityVersion.WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10)
                 {
                     retval = ConfigurationStrings.WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10;
                 }
                 else
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value",
-                        SR.Format(SR.ConfigInvalidClassInstanceValue, typeof(MessageSecurityVersion).FullName)));
+                        SR.Format(SR.ConfigInvalidClassInstanceValue, typeof(SMMessageSecurityVersion).FullName)));
                 }
                 return retval;
             }

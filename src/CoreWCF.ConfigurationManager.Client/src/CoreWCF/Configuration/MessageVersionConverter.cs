@@ -4,9 +4,9 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.Design.Serialization;
-using CoreWCF.Channels;
+using System.ServiceModel.Channels;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     internal sealed class MessageVersionConverter : TypeConverter
     {

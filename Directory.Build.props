@@ -21,6 +21,7 @@
     <IsSampleProject>$(ParentFolder.EndsWith(`Samples`, true, null))</IsSampleProject>
     <IsTestProject>$(MSBuildProjectName.EndsWith(`Tests`, true, null))</IsTestProject>
     <IsClientProject>$(MSBuildProjectName.Contains(`Client`))</IsClientProject>
+    <IsClientProject Condition="$(MSBuildProjectName.Contains(`ConfigurationManager.Client`))">False</IsClientProject>
     <IsMsmqProject>$(MSBuildProjectName.Contains(`MSMQ`))</IsMsmqProject>
     <IsMetadataProject>$(MSBuildProjectName.Contains(`Metadata`))</IsMetadataProject>
     <IsHttpProject>$(MSBuildProjectName.Contains(`.Http`))</IsHttpProject>

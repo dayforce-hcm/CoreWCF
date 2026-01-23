@@ -3,16 +3,17 @@
 
 using System;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
-    public class ServiceEndpoint
+    public class ClientEndpoint
     {
-        public string ServiceName { get; set; }
         public Uri Address { get; set; }
+        public string BehaviorConfiguration { get; set; }
         public string Binding { get; set; }
         public string BindingConfiguration { get; set; }
+        public string Contract { get; set; }        
+        public string EndpointConfiguration{ get; set; }
+        public string Kind { get; set; }
         public string Name { get; set; }
-        public string Contract { get; set; }
-        public string BindingNamespace { get; set; }
     }
 }

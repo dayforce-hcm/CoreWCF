@@ -4,7 +4,7 @@
 using System;
 using System.Reflection;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     internal class ServiceReflector
     {

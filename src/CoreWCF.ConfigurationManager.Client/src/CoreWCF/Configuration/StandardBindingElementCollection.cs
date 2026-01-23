@@ -3,7 +3,7 @@
 
 using System.Configuration;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     public class StandardBindingElementCollection<TBindingConfiguration> : ServiceModelEnhancedConfigurationElementCollection<TBindingConfiguration>
         where TBindingConfiguration : ConfigurationElement, IDefaultCommunicationTimeouts, IStandardBindingElement, new()

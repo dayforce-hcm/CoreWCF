@@ -2,34 +2,37 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.IdentityModel.Tokens;
 using System.Net;
 using System.Net.Security;
 using System.Net.WebSockets;
 using System.Security.Authentication;
+using System.ServiceModel.Channels;
+using System.ServiceModel.Security;
 using System.Text;
-using CoreWCF.Channels;
-using CoreWCF.IdentityModel.Tokens;
-using CoreWCF.Security;
+using SMEnvelopeVersion = System.ServiceModel.EnvelopeVersion;
+using SMTransferMode = System.ServiceModel.TransferMode;
+using SMHostNameComparisonMode = System.ServiceModel.HostNameComparisonMode;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     internal static class BinaryEncoderDefaults
     {
-        internal static EnvelopeVersion EnvelopeVersion { get { return EnvelopeVersion.Soap12; } }
+        internal static SMEnvelopeVersion EnvelopeVersion { get { return SMEnvelopeVersion.Soap12; } }
 
         internal const int MaxSessionSize = 2048;
     }
 
     internal static class ConnectionOrientedTransportDefaults
     {
-        internal const HostNameComparisonMode HostNameComparisonMode = CoreWCF.HostNameComparisonMode.StrongWildcard;
+        internal const SMHostNameComparisonMode HostNameComparisonMode = SMHostNameComparisonMode.StrongWildcard;
         internal const int ConnectionBufferSize = 8192;
         internal const ProtectionLevel ProtectionLevel = System.Net.Security.ProtectionLevel.EncryptAndSign;
         internal const string ChannelInitializationTimeoutString = "00:00:30";
         internal const int MaxPendingConnectionsConst = 0;
         internal const string MaxOutputDelayString = "00:00:00.2";
         internal const int MaxPendingAcceptsConst = 0;
-        internal const TransferMode TransferMode = CoreWCF.TransferMode.Buffered;
+        internal const SMTransferMode TransferMode = SMTransferMode.Buffered;
         internal const string IdleTimeoutString = "00:02:00";
         internal const int MaxOutboundConnectionsPerEndpoint = 10;
     }
@@ -40,12 +43,12 @@ namespace CoreWCF.Configuration
         internal const AuthenticationSchemes AuthenticationScheme = AuthenticationSchemes.Anonymous;
         internal const bool BypassProxyOnLocal = false;
         internal const bool DecompressionEnabled = true;
-        internal const HostNameComparisonMode HostNameComparisonMode = CoreWCF.HostNameComparisonMode.StrongWildcard;
+        internal const SMHostNameComparisonMode HostNameComparisonMode = SMHostNameComparisonMode.StrongWildcard;
         internal const bool KeepAliveEnabled = true;
         internal const Uri ProxyAddress = null;
         internal const AuthenticationSchemes ProxyAuthenticationScheme = AuthenticationSchemes.Anonymous;
         internal const string Realm = "";
-        internal const TransferMode TransferMode = CoreWCF.TransferMode.Buffered;
+        internal const SMTransferMode TransferMode = SMTransferMode.Buffered;
         internal const bool UnsafeConnectionNtlmAuthentication = false;
         internal const bool UseDefaultWebProxy = true;
         
@@ -71,7 +74,7 @@ namespace CoreWCF.Configuration
         internal const SecurityKeyType DefaultKeyType = SecurityKeyType.SymmetricKey;
         internal const string DefaultAlgorithmSuiteString = "Default";
         internal const bool DefaultRequireDerivedKeys = true;
-        internal const bool DefaultAllowSerializedSigningTokenOnReply = false;
+        internal const bool DefaultAllowSerializedSigningTokenOnReply = false;  
         internal const bool DefaultEnableUnsecuredResponse = false;
         internal const bool DefaultIncludeTimestamp = true;
         internal const bool DefaultAllowInsecureTransport = false;
@@ -100,7 +103,7 @@ namespace CoreWCF.Configuration
         internal const int DefaultServerMaxCachedTokens = 1000;
         internal const SecurityHeaderLayout DefaultSecurityHeaderLayout = SecurityHeaderLayout.Strict;
         internal const SecurityKeyEntropyMode DefaultKeyEntropyMode = SecurityKeyEntropyMode.CombinedEntropy;
-        internal const MessageProtectionOrder DefaultMessageProtectionOrder = MessageProtectionOrder.SignBeforeEncryptAndEncryptSignature;
+        //internal const MessageProtectionOrder DefaultMessageProtectionOrder = MessageProtectionOrder.SignBeforeEncryptAndEncryptSignature;
         internal const AuthenticationMode DefaultAuthenticationMode = AuthenticationMode.SspiNegotiatedOverTransport;
     }
 

@@ -2,9 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Configuration;
-using CoreWCF.Channels;
+using System.ServiceModel;
+using System.ServiceModel.Channels;
+using SMTransferMode = System.ServiceModel.TransferMode;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     public class BasicHttpBindingElement : HttpBindingBaseElement
     {
@@ -35,11 +37,20 @@ namespace CoreWCF.Configuration
                 CloseTimeout = CloseTimeout,
                 OpenTimeout = OpenTimeout,
                 SendTimeout = SendTimeout,
-                TransferMode = TransferMode,
+                TransferMode = (SMTransferMode)TransferMode,
                 TextEncoding = TextEncoding,
                 ReaderQuotas = ReaderQuotas.Clone(),
-            };
 
+                //BypassProxyOnLocal = BypassProxyOnLocal,              // Not supported in CoreWCF
+                //HostNameComparisonMode = HostNameComparisonMode,      // Not supported in netstandard2.0
+                MaxBufferPoolSize = MaxBufferPoolSize,
+                ProxyAddress = ProxyAddress,
+                UseDefaultWebProxy = UseDefaultWebProxy
+            };
+            if (!string.IsNullOrEmpty(MessageEncoding))
+            {
+                binding.MessageEncoding = (WSMessageEncoding)System.Enum.Parse(typeof(WSMessageEncoding), MessageEncoding);
+            }
             Security.ApplyConfiguration(binding.Security);
             return binding;
         }

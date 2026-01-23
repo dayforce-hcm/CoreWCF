@@ -8,7 +8,7 @@ using System.Configuration;
 using System.Security;
 using System.Xml;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     public abstract class ServiceModelExtensionCollectionElement<TServiceModelExtensionElement> : ServiceModelConfigurationElement, ICollection<TServiceModelExtensionElement>
         where TServiceModelExtensionElement : ServiceModelExtensionElement

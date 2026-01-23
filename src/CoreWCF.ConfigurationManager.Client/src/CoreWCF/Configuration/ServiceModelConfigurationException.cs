@@ -4,7 +4,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     [Serializable]
     internal class ServiceModelConfigurationException : Exception

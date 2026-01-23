@@ -3,9 +3,9 @@
 
 using System;
 using System.Configuration;
-using CoreWCF.Channels;
+using System.ServiceModel.Channels;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     public class HttpsTransportElement : HttpTransportElement
     {

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Security.Authentication.ExtendedProtection;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     public sealed class ExtendedProtectionPolicyElement : ConfigurationElement
     {

@@ -1,0 +1,54 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>$(TestTargetFrameworks)</TargetFrameworks>
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <IsPackable>false</IsPackable>
+    <AssemblyName>CoreWCF.ConfigurationManager.Client.Tests</AssemblyName>
+    <!-- Use same key as the granting assembly; enable signing for all TFMs -->
+    <AssemblyOriginatorKeyFile>$(ProjectDir)corewcf.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>true</SignAssembly>
+    <PublicSign>true</PublicSign>
+    <!-- Tell granting assembly to allow non-key friend access when tests aren’t actually strong-named -->
+    <DefineConstants>$(DefineConstants);FRIEND_TESTS_NO_KEY</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="$(ProjectDir)corewcf.snk" Pack="false" CopyToOutputDirectory="Never" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Compile Remove="src\**" />
+    <None Remove="src\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Moq" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" />
+    <PackageReference Include="System.ServiceModel.NetTcp" />
+    <PackageReference Include="System.ServiceModel.Primitives" />
+    <PackageReference Include="System.ServiceModel.Security" Condition=" '$(TargetFramework)' != 'net472' " />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)'=='net472'">
+    <PackageReference Include="Microsoft.AspNetCore" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
+    <PackageReference Include="Microsoft.AspNetCore.Server.HttpSys" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)'!='net472'">
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\src\CoreWCF.ConfigurationManager.Client.csproj" />
+  </ItemGroup>
+
+  <Import Project="..\src\CoreWCF.ConfigurationManager.Client.targets" Condition="Exists('..\src\CoreWCF.ConfigurationManager.Client.targets')" />
+  <ItemGroup>
+    <_CoreWCFConfigClientFiles Remove="@(_CoreWCFConfigClientFiles)" />
+	<_CoreWCFConfigClientFiles Include="..\src\CoreWCF.ConfigurationManager.Client.config" />
+  </ItemGroup>
+</Project>

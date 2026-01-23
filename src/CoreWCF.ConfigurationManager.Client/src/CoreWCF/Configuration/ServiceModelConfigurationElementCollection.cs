@@ -5,7 +5,7 @@ using System;
 using System.Collections;
 using System.Configuration;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     public abstract class ServiceModelConfigurationElementCollection<TConfigurationElementType> : ConfigurationElementCollection
         where TConfigurationElementType : ConfigurationElement, new()

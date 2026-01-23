@@ -5,25 +5,31 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 using System.IO;
-using System;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     public static class ConfigurationManagerExtensions
     {
-        public static IServiceCollection AddServiceModelConfigurationManagerFile(this IServiceCollection builder, string path)
-        {           
+        public static IServiceCollection AddClientModelConfigurationManagerFile(this IServiceCollection services, string path)
+        {
             if (!File.Exists(path)) { throw new FileNotFoundException(SR.Format(SR.FileNotFound, path)); }
             using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read))
             {
-                if (!fs.CanRead) { throw new IOException(SR.Format(SR.CannotAccessFile, path)); }    
+                if (!fs.CanRead) { throw new IOException(SR.Format(SR.CannotAccessFile, path)); }
             }
-            
-            builder.TryAddSingleton<IConfigurationHolder, ConfigurationHolder>();
-            builder.TryAddSingleton<IBindingFactory, BindingFactory>();
-            builder.AddSingleton<IConfigureOptions<ServiceModelOptions>>(ctx => new ConfigurationManagerServiceModelOptions(ctx, path));          
 
-            return builder;
+            services.TryAddSingleton<IConfigurationHolder, ConfigurationHolder>();
+            services.TryAddSingleton<IBindingFactory, BindingFactory>();
+            services.TryAddSingleton<IServiceEndpointBuilder, ServiceEndpointBuilder>();
+            services.AddSingleton<IConfigureOptions<ClientModelOptions>>(ctx => new ConfigurationManagerServiceModelOptions(ctx, path));
+
+            return services;
+        }
+
+        public static IServiceCollection AddClientModelServices( this IServiceCollection services)
+        {
+            services.AddOptions();            
+            return services;
         }
     }
 }

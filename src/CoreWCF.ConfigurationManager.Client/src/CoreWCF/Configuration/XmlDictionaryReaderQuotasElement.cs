@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Configuration;
+using System.ServiceModel.Channels;
 using System.Xml;
-using CoreWCF.Channels;
 
-namespace CoreWCF.Configuration
+namespace CoreWCF.ConfigurationManager.Client
 {
     public class XmlDictionaryReaderQuotasElement : ServiceModelConfigurationElement
     {
