@@ -4,15 +4,18 @@
 using System;
 using System.Configuration;
 using System.ServiceModel;
+using CoreWCF.Configuration;
+using SMHttpTransportSecurity = System.ServiceModel.HttpTransportSecurity;
+using SMHttpClientCredentialType = System.ServiceModel.HttpClientCredentialType;
 
 namespace CoreWCF.ConfigurationManager.Client
 {
     public class HttpTransportSecurityElement : ServiceModelConfigurationElement
     {
-        [ConfigurationProperty(ConfigurationStrings.ClientCredentialType, DefaultValue = HttpClientCredentialType.None)]
-        public HttpClientCredentialType ClientCredentialType
+        [ConfigurationProperty(ConfigurationStrings.ClientCredentialType, DefaultValue = SMHttpClientCredentialType.None)]
+        public SMHttpClientCredentialType ClientCredentialType
         {
-            get { return (HttpClientCredentialType)base[ConfigurationStrings.ClientCredentialType]; }
+            get { return (SMHttpClientCredentialType)base[ConfigurationStrings.ClientCredentialType]; }
             set { base[ConfigurationStrings.ClientCredentialType] = value; }
         }
 
@@ -38,7 +41,7 @@ namespace CoreWCF.ConfigurationManager.Client
             }
         }
 
-        internal void ApplyConfiguration(HttpTransportSecurity security)
+        internal void ApplyConfiguration(SMHttpTransportSecurity security)
         {
             if (security == null)
             {

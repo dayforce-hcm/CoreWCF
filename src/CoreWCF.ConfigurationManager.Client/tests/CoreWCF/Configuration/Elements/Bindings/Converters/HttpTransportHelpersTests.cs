@@ -4,6 +4,7 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using Xunit;
 using CoreWCF.ConfigurationManager.Client;
+using SMHttpClientCredentialType = System.ServiceModel.HttpClientCredentialType;
 
 namespace CoreWCF.ConfigurationManager.Client.Tests.CoreWCF.Configuration.Elements.Bindings.Converters
 {
@@ -13,7 +14,7 @@ namespace CoreWCF.ConfigurationManager.Client.Tests.CoreWCF.Configuration.Elemen
         public void ConfigureTransportProtectionAndAuthentication_SetsRequireClientCertificate()
         {
             var https = new HttpsTransportBindingElement();
-            var security = new HttpTransportSecurity { ClientCredentialType = HttpClientCredentialType.Certificate };
+            var security = new System.ServiceModel.HttpTransportSecurity { ClientCredentialType = SMHttpClientCredentialType.Certificate };
             HttpTransportHelpers.ConfigureTransportProtectionAndAuthentication(https, security);
             Assert.True(https.RequireClientCertificate);
         }
@@ -22,22 +23,22 @@ namespace CoreWCF.ConfigurationManager.Client.Tests.CoreWCF.Configuration.Elemen
         public void ConfigureTransportAuthentication_ThrowsOnCertificateCredentialType()
         {
             var http = new HttpTransportBindingElement();
-            var security = new HttpTransportSecurity { ClientCredentialType = HttpClientCredentialType.Certificate };
+            var security = new System.ServiceModel.HttpTransportSecurity { ClientCredentialType = SMHttpClientCredentialType.Certificate };
             Assert.Throws<InvalidOperationException>(() => HttpTransportHelpers.ConfigureTransportAuthentication(http, security));
         }
 
         [Theory]
-        [InlineData(HttpClientCredentialType.None, AuthenticationSchemes.Anonymous)]
-        [InlineData(HttpClientCredentialType.Basic, AuthenticationSchemes.Basic)]
-        [InlineData(HttpClientCredentialType.Digest, AuthenticationSchemes.Digest)]
-        [InlineData(HttpClientCredentialType.Ntlm, AuthenticationSchemes.Ntlm)]
-        [InlineData(HttpClientCredentialType.Windows, AuthenticationSchemes.Negotiate)]
-        [InlineData(HttpClientCredentialType.InheritedFromHost, AuthenticationSchemes.None)]
-        public void ConfigureTransportAuthentication_SetsAuthenticationScheme(HttpClientCredentialType credentialType, AuthenticationSchemes expectedScheme)
+        [InlineData(SMHttpClientCredentialType.None, AuthenticationSchemes.Anonymous)]
+        [InlineData(SMHttpClientCredentialType.Basic, AuthenticationSchemes.Basic)]
+        [InlineData(SMHttpClientCredentialType.Digest, AuthenticationSchemes.Digest)]
+        [InlineData(SMHttpClientCredentialType.Ntlm, AuthenticationSchemes.Ntlm)]
+        [InlineData(SMHttpClientCredentialType.Windows, AuthenticationSchemes.Negotiate)]
+        [InlineData(SMHttpClientCredentialType.InheritedFromHost, AuthenticationSchemes.None)]
+        public void ConfigureTransportAuthentication_SetsAuthenticationScheme(SMHttpClientCredentialType credentialType, AuthenticationSchemes expectedScheme)
         {
             var http = new HttpTransportBindingElement();
-            var security = new HttpTransportSecurity { ClientCredentialType = credentialType };
-            if (credentialType != HttpClientCredentialType.Certificate)
+            var security = new System.ServiceModel.HttpTransportSecurity { ClientCredentialType = credentialType };
+            if (credentialType != SMHttpClientCredentialType.Certificate)
             {
                 HttpTransportHelpers.ConfigureTransportAuthentication(http, security);
                 Assert.Equal(expectedScheme, http.AuthenticationScheme);

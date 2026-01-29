@@ -2,6 +2,7 @@ using System.Linq;
 using Xunit;
 using CoreWCF.ConfigurationManager.Client;
 using System;
+using CoreWCF.Configuration;
 
 namespace CoreWCF.ConfigurationManager.Client.Tests.CoreWCF.Configuration.Elements.Bindings.Properties.Security
 {

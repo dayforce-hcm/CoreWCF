@@ -64,7 +64,7 @@ namespace CoreWCF.ConfigurationManager.Client.Tests.IntegrationTests.Bindings
                 Assert.NotNull(endpoint);
                 Assert.Equal(EndpointAddress, endpoint.Address.Uri.ToString());
                 Assert.Equal(BindingName, endpoint.Binding.Name, true);
-                var basicHttpBinding = endpoint.Binding as BasicHttpBinding;
+                var basicHttpBinding = endpoint.Binding as System.ServiceModel.BasicHttpBinding;
                 Assert.NotNull(basicHttpBinding);
                 var security = basicHttpBinding.Security;
                 Assert.NotNull(security);
@@ -122,7 +122,7 @@ namespace CoreWCF.ConfigurationManager.Client.Tests.IntegrationTests.Bindings
                 Assert.NotNull(endpoint);
                 Assert.Equal(EndpointAddress, endpoint.Address.Uri.ToString());
                 Assert.Equal(BindingName, endpoint.Binding.Name, true);
-                var basicHttpBinding = endpoint.Binding as BasicHttpBinding;
+                var basicHttpBinding = endpoint.Binding as System.ServiceModel.BasicHttpBinding;
                 Assert.NotNull(basicHttpBinding);
                 var security = basicHttpBinding.Security;
                 Assert.NotNull(security);
@@ -178,7 +178,7 @@ namespace CoreWCF.ConfigurationManager.Client.Tests.IntegrationTests.Bindings
                 Assert.NotNull(endpoint);
                 Assert.Equal(EndpointAddress, endpoint.Address.Uri.ToString());
                 Assert.Equal(BindingName, endpoint.Binding.Name, true);
-                var basicHttpBinding = endpoint.Binding as BasicHttpBinding;
+                var basicHttpBinding = endpoint.Binding as System.ServiceModel.BasicHttpBinding;
                 Assert.NotNull(basicHttpBinding);
                 var security = basicHttpBinding.Security;
                 Assert.NotNull(security);
@@ -231,7 +231,7 @@ namespace CoreWCF.ConfigurationManager.Client.Tests.IntegrationTests.Bindings
                 Assert.NotNull(endpoint);
                 Assert.Equal(EndpointAddress, endpoint.Address.Uri.ToString());
                 Assert.Equal(BindingName, endpoint.Binding.Name, true);
-                var basicHttpBinding = endpoint.Binding as BasicHttpBinding;
+                var basicHttpBinding = endpoint.Binding as System.ServiceModel.BasicHttpBinding;
                 Assert.NotNull(basicHttpBinding);
                 var security = basicHttpBinding.Security;
                 Assert.NotNull(security);

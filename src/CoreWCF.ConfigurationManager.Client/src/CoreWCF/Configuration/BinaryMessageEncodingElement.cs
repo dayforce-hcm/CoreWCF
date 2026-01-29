@@ -1,10 +1,10 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using CoreWCF.ConfigurationManager.Client;
 using System;
 using System.Configuration;
 using System.ServiceModel.Channels;
+using CoreWCF.Configuration;
 
 namespace CoreWCF.ConfigurationManager.Client
 {

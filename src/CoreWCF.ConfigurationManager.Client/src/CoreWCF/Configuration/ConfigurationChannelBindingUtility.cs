@@ -6,6 +6,8 @@ using System.Net;
 using System.Net.Security;
 using System.Runtime.InteropServices;
 using System.Security.Authentication.ExtendedProtection;
+using CoreWCF.Channels;
+using CoreWCF.Configuration;
 using CoreWCF.Runtime;
 
 namespace CoreWCF.ConfigurationManager.Client

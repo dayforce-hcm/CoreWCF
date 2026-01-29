@@ -6,6 +6,7 @@ using System.ServiceModel.Channels;
 using System.Xml;
 using System.ServiceModel;
 using SMTransferMode = System.ServiceModel.TransferMode;
+using SMWebHttpBinding = CoreWCF.ConfigurationManager.Client.WebHttpBinding;
 
 namespace CoreWCF.ConfigurationManager.Elements.Bindings.WebHttp.Tests
 {
@@ -14,21 +15,21 @@ namespace CoreWCF.ConfigurationManager.Elements.Bindings.WebHttp.Tests
         [Fact]
         public void CanInstantiateWebHttpBinding_DefaultConstructor()
         {
-            var binding = new WebHttpBinding();
+            var binding = new SMWebHttpBinding();
             Assert.NotNull(binding);
         }
 
         [Fact]
         public void CanInstantiateWebHttpBinding_WithSecurityMode()
         {
-            var binding = new WebHttpBinding(WebHttpSecurityMode.Transport);
+            var binding = new SMWebHttpBinding(WebHttpSecurityMode.Transport);
             Assert.Equal(WebHttpSecurityMode.Transport, binding.Security.Mode);
         }
 
         [Fact]
         public void DefaultValues_AreCorrect()
         {
-            var binding = new WebHttpBinding();
+            var binding = new SMWebHttpBinding();
             Assert.Equal(65536, binding.MaxReceivedMessageSize);
             Assert.Equal(524288, binding.MaxBufferPoolSize);
             Assert.Equal(SMTransferMode.Buffered, binding.TransferMode);
@@ -45,7 +46,7 @@ namespace CoreWCF.ConfigurationManager.Elements.Bindings.WebHttp.Tests
         [Fact]
         public void CanSetAndGetProperties()
         {
-            var binding = new WebHttpBinding();
+            var binding = new SMWebHttpBinding();
             binding.MaxBufferPoolSize = 1234;
             binding.MaxBufferSize = 5678;
             binding.MaxReceivedMessageSize = 4321;
@@ -79,7 +80,7 @@ namespace CoreWCF.ConfigurationManager.Elements.Bindings.WebHttp.Tests
         [Fact]
         public void CreateBindingElements_WithTransport_UsesHttpsTransport()
         {
-            var binding = new WebHttpBinding(WebHttpSecurityMode.Transport);
+            var binding = new CoreWCF.ConfigurationManager.Client.WebHttpBinding(WebHttpSecurityMode.Transport);
             var elements = binding.CreateBindingElements();
             Assert.NotNull(elements);
             bool hasHttps = false;
@@ -97,7 +98,7 @@ namespace CoreWCF.ConfigurationManager.Elements.Bindings.WebHttp.Tests
         [Fact]
         public void CreateBindingElements_WithTransportCredentialOnly_UsesHttpTransport()
         {
-            var binding = new WebHttpBinding(WebHttpSecurityMode.TransportCredentialOnly);
+            var binding = new CoreWCF.ConfigurationManager.Client.WebHttpBinding(WebHttpSecurityMode.TransportCredentialOnly);
             var elements = binding.CreateBindingElements();
             Assert.NotNull(elements);
             bool hasHttp = false;

@@ -12,6 +12,7 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Security;
 using System.ServiceModel.Security.Tokens;
 using System.Xml;
+using CoreWCF.Configuration;
 using CoreWCF.Runtime;
 using SMMessageSecurityVersion = System.ServiceModel.MessageSecurityVersion;
 

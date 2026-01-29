@@ -4,6 +4,7 @@ using System;
 using System.ServiceModel;
 using System.ServiceModel.Security;
 using System.Globalization;
+using SMBasicHttpMessageCredentialType = System.ServiceModel.BasicHttpMessageCredentialType;
 
 namespace CoreWCF.ConfigurationManager.Client.Tests.CoreWCF.Configuration.Elements.Bindings.Properties.Security
 {
@@ -13,15 +14,15 @@ namespace CoreWCF.ConfigurationManager.Client.Tests.CoreWCF.Configuration.Elemen
         public void ClientCredentialType_Default_IsUserName()
         {
             var element = new BasicHttpMessageSecurityElement();
-            Assert.Equal(BasicHttpMessageCredentialType.UserName, element.ClientCredentialType);
+            Assert.Equal(SMBasicHttpMessageCredentialType.UserName, element.ClientCredentialType);
         }
 
         [Fact]
         public void ClientCredentialType_SetValue_ReturnsValue()
         {
             var element = new BasicHttpMessageSecurityElement();
-            element.ClientCredentialType = BasicHttpMessageCredentialType.Certificate;
-            Assert.Equal(BasicHttpMessageCredentialType.Certificate, element.ClientCredentialType);
+            element.ClientCredentialType = SMBasicHttpMessageCredentialType.Certificate;
+            Assert.Equal(SMBasicHttpMessageCredentialType.Certificate, element.ClientCredentialType);
         }
 
         [Fact]
@@ -35,10 +36,10 @@ namespace CoreWCF.ConfigurationManager.Client.Tests.CoreWCF.Configuration.Elemen
         public void ApplyConfiguration_SetsClientCredentialType()
         {
             var element = new BasicHttpMessageSecurityElement();
-            var security = new BasicHttpMessageSecurity();
-            element.ClientCredentialType = BasicHttpMessageCredentialType.Certificate;
+            var security = new System.ServiceModel.BasicHttpMessageSecurity();
+            element.ClientCredentialType = SMBasicHttpMessageCredentialType.Certificate;
             element.ApplyConfiguration(security);
-            Assert.Equal(BasicHttpMessageCredentialType.Certificate, security.ClientCredentialType);
+            Assert.Equal(SMBasicHttpMessageCredentialType.Certificate, security.ClientCredentialType);
         }
 
         [Theory]

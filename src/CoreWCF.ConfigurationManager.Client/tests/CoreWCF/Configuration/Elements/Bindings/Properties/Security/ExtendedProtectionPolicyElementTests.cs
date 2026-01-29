@@ -2,6 +2,7 @@ using Xunit;
 using CoreWCF.ConfigurationManager.Client;
 using System.Security.Authentication.ExtendedProtection;
 using System.Collections.Generic;
+using CoreWCF.Configuration;
 
 namespace CoreWCF.ConfigurationManager.Client.Tests.CoreWCF.Configuration.Elements.Bindings.Properties.Security
 {

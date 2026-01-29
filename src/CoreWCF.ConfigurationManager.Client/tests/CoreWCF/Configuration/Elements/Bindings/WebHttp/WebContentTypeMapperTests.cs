@@ -1,5 +1,7 @@
 using Xunit;
 using CoreWCF.ConfigurationManager.Client;
+using WebContentTypeMapper = CoreWCF.Channels.WebContentTypeMapper;
+using WebContentFormat = CoreWCF.Channels.WebContentFormat;
 
 namespace CoreWCF.ConfigurationManager.Elements.Bindings.WebHttp.Tests
 {

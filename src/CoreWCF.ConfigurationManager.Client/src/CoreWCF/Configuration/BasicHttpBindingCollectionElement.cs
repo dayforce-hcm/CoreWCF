@@ -5,7 +5,7 @@ using System.ServiceModel;
 
 namespace CoreWCF.ConfigurationManager.Client
 {
-    public class BasicHttpBindingCollectionElement : StandardBindingCollectionElement<BasicHttpBinding, BasicHttpBindingElement>
+    public class BasicHttpBindingCollectionElement : StandardBindingCollectionElement<System.ServiceModel.BasicHttpBinding, BasicHttpBindingElement>
     {
     }
 }

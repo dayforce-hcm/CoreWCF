@@ -1,6 +1,7 @@
 using Xunit;
 using CoreWCF.ConfigurationManager.Client;
 using System.ServiceModel;
+using SMHttpClientCredentialType = System.ServiceModel.HttpClientCredentialType;
 
 namespace CoreWCF.ConfigurationManager.Client.Tests.CoreWCF.Configuration.Elements.Bindings
 {
@@ -10,16 +11,16 @@ namespace CoreWCF.ConfigurationManager.Client.Tests.CoreWCF.Configuration.Elemen
         public void Default_ClientCredentialType_IsNone()
         {
             var element = new HttpTransportSecurityElement();
-            Assert.Equal(HttpClientCredentialType.None, element.ClientCredentialType);
+            Assert.Equal(SMHttpClientCredentialType.None, element.ClientCredentialType);
         }
 
         [Fact]
         public void Properties_SetAndGet_ReturnsValues()
         {
             var element = new HttpTransportSecurityElement();
-            element.ClientCredentialType = HttpClientCredentialType.Basic;
+            element.ClientCredentialType = SMHttpClientCredentialType.Basic;
             element.Realm = "realm";
-            Assert.Equal(HttpClientCredentialType.Basic, element.ClientCredentialType);
+            Assert.Equal(SMHttpClientCredentialType.Basic, element.ClientCredentialType);
             Assert.Equal("realm", element.Realm);
         }
 
@@ -44,10 +45,10 @@ namespace CoreWCF.ConfigurationManager.Client.Tests.CoreWCF.Configuration.Elemen
         public void ApplyConfiguration_SetsSecurityProperties()
         {
             var element = new HttpTransportSecurityElement();
-            var security = new HttpTransportSecurity();
-            element.ClientCredentialType = HttpClientCredentialType.Windows;
+            var security = new System.ServiceModel.HttpTransportSecurity();
+            element.ClientCredentialType = SMHttpClientCredentialType.Windows;
             element.ApplyConfiguration(security);
-            Assert.Equal(HttpClientCredentialType.Windows, security.ClientCredentialType);
+            Assert.Equal(SMHttpClientCredentialType.Windows, security.ClientCredentialType);
         }
     }
 }

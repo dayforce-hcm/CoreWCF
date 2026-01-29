@@ -1,5 +1,6 @@
 using Xunit;
 using CoreWCF.ConfigurationManager.Client;
+using CoreWCF.Configuration;
 
 namespace CoreWCF.ConfigurationManager.Client.Tests.CoreWCF.Configuration.Elements.Bindings
 {

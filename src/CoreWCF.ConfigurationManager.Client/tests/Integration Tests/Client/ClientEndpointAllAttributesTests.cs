@@ -1,3 +1,4 @@
+using CoreWCF.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
 using System.ServiceModel;

@@ -7,6 +7,7 @@ using System.Configuration;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Security;
 using System.ServiceModel.Security.Tokens;
+using CoreWCF.Configuration;
 
 namespace CoreWCF.ConfigurationManager.Client
 {

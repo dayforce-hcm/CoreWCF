@@ -5,6 +5,7 @@ using System;
 using System.Configuration;
 using System.Net;
 using System.ServiceModel.Channels;
+using CoreWCF.Configuration;
 using SMTransferMode =  System.ServiceModel.TransferMode;
 
 namespace CoreWCF.ConfigurationManager.Client

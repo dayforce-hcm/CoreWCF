@@ -13,6 +13,7 @@ using System.Text;
 using SMEnvelopeVersion = System.ServiceModel.EnvelopeVersion;
 using SMTransferMode = System.ServiceModel.TransferMode;
 using SMHostNameComparisonMode = System.ServiceModel.HostNameComparisonMode;
+using CoreWCF.Configuration;
 
 namespace CoreWCF.ConfigurationManager.Client
 {

@@ -3,6 +3,7 @@
 
 using System;
 using System.ServiceModel.Channels;
+using CoreWCF.Configuration;
 
 namespace CoreWCF.ConfigurationManager.Client
 {

@@ -1,6 +1,8 @@
 using Xunit;
 using CoreWCF.ConfigurationManager.Client;
 using System.ServiceModel;
+using SMHttpClientCredentialType = System.ServiceModel.HttpClientCredentialType;
+using SMBasicHttpMessageCredentialType = System.ServiceModel.BasicHttpMessageCredentialType;
 
 namespace CoreWCF.ConfigurationManager.Client.Tests.CoreWCF.Configuration.Elements.Bindings
 {
@@ -23,14 +25,14 @@ namespace CoreWCF.ConfigurationManager.Client.Tests.CoreWCF.Configuration.Elemen
             var bindingElement = new BasicHttpBindingElement();
             var security = bindingElement.Security;
             security.Mode = BasicHttpSecurityMode.TransportWithMessageCredential;
-            security.Transport.ClientCredentialType = HttpClientCredentialType.Windows;
+            security.Transport.ClientCredentialType = SMHttpClientCredentialType.Windows;
             security.Transport.Realm = "TestRealm";
-            security.Message.ClientCredentialType = BasicHttpMessageCredentialType.Certificate;
+            security.Message.ClientCredentialType = SMBasicHttpMessageCredentialType.Certificate;
 
             Assert.Equal(BasicHttpSecurityMode.TransportWithMessageCredential, security.Mode);
-            Assert.Equal(HttpClientCredentialType.Windows, security.Transport.ClientCredentialType);
+            Assert.Equal(SMHttpClientCredentialType.Windows, security.Transport.ClientCredentialType);
             Assert.Equal("TestRealm", security.Transport.Realm);
-            Assert.Equal(BasicHttpMessageCredentialType.Certificate, security.Message.ClientCredentialType);
+            Assert.Equal(SMBasicHttpMessageCredentialType.Certificate, security.Message.ClientCredentialType);
         }
 
         [Fact]
@@ -39,14 +41,14 @@ namespace CoreWCF.ConfigurationManager.Client.Tests.CoreWCF.Configuration.Elemen
             var bindingElement = new BasicHttpBindingElement("TestBindingName");
             var security = bindingElement.Security;
             security.Mode = BasicHttpSecurityMode.Transport;
-            security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
+            security.Transport.ClientCredentialType = SMHttpClientCredentialType.Basic;
             security.Transport.Realm = "RealmValue";
-            security.Message.ClientCredentialType = BasicHttpMessageCredentialType.UserName;
+            security.Message.ClientCredentialType = SMBasicHttpMessageCredentialType.UserName;
 
             var binding = (System.ServiceModel.BasicHttpBinding)bindingElement.CreateBinding();
             Assert.Equal(BasicHttpSecurityMode.Transport, binding.Security.Mode);
-            Assert.Equal(HttpClientCredentialType.Basic, binding.Security.Transport.ClientCredentialType);
-            Assert.Equal(BasicHttpMessageCredentialType.UserName, binding.Security.Message.ClientCredentialType);
+            Assert.Equal(SMHttpClientCredentialType.Basic, binding.Security.Transport.ClientCredentialType);
+            Assert.Equal(SMBasicHttpMessageCredentialType.UserName, binding.Security.Message.ClientCredentialType);
         }
     }
 }

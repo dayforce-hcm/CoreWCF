@@ -4,6 +4,8 @@
 using System;
 using System.Configuration;
 using System.ServiceModel;
+using SMBasicHttpSecurity = System.ServiceModel.BasicHttpSecurity;
+using CoreWCF.Configuration;
 
 namespace CoreWCF.ConfigurationManager.Client
 {
@@ -28,7 +30,7 @@ namespace CoreWCF.ConfigurationManager.Client
             get { return (BasicHttpMessageSecurityElement)base[ConfigurationStrings.Message]; }
         }
 
-        internal void ApplyConfiguration(BasicHttpSecurity security)
+        internal void ApplyConfiguration(SMBasicHttpSecurity security)
         {
             if (security == null)
             {

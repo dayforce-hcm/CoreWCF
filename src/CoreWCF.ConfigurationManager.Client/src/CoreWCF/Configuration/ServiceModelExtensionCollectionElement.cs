@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Security;
 using System.Xml;
+using CoreWCF.Configuration;
 
 namespace CoreWCF.ConfigurationManager.Client
 {

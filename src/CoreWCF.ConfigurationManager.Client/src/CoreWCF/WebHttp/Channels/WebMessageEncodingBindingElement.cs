@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.Text;
 using System.Xml;
+using WebContentTypeMapper = CoreWCF.Channels.WebContentTypeMapper;
 
 namespace CoreWCF.ConfigurationManager.Client
 {

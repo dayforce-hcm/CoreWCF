@@ -2,15 +2,13 @@
 
   <PropertyGroup>
     <TargetFrameworks>$(TestTargetFrameworks)</TargetFrameworks>
-    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <GenerateRuntimeConfigurationFiles>false</GenerateRuntimeConfigurationFiles>
     <IsPackable>false</IsPackable>
-    <AssemblyName>CoreWCF.ConfigurationManager.Client.Tests</AssemblyName>
+
+    <!--<AssemblyName>CoreWCF.ConfigurationManager.Client.Tests</AssemblyName>-->
     <!-- Use same key as the granting assembly; enable signing for all TFMs -->
     <AssemblyOriginatorKeyFile>$(ProjectDir)corewcf.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>
-    <PublicSign>true</PublicSign>
-    <!-- Tell granting assembly to allow non-key friend access when tests aren’t actually strong-named -->
-    <DefineConstants>$(DefineConstants);FRIEND_TESTS_NO_KEY</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>

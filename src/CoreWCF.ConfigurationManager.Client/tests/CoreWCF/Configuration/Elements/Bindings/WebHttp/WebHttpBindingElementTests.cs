@@ -55,7 +55,7 @@ namespace CoreWCF.ConfigurationManager.Elements.Bindings.WebHttp.Tests
             var element = new WebHttpBindingElement();
             element.Name = "TestBinding"; // Set a valid name
             var binding = element.CreateBinding();
-            Assert.IsType<WebHttpBinding>(binding);
+            Assert.IsType<CoreWCF.ConfigurationManager.Client.WebHttpBinding>(binding);
         }
 
         [Fact]

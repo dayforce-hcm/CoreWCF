@@ -34,7 +34,7 @@ namespace CoreWCF.ConfigurationManager.Client.Tests.CoreWCF.Configuration.Elemen
         {
             var element = new BasicHttpBindingElement("TestBindingName");
             var binding = element.CreateBinding();
-            Assert.IsType<BasicHttpBinding>(binding);
+            Assert.IsType<System.ServiceModel.BasicHttpBinding>(binding);
             Assert.Equal("TestBindingName", binding.Name);
         }
     }

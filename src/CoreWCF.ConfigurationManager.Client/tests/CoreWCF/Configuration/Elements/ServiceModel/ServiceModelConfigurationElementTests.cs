@@ -1,3 +1,4 @@
+using CoreWCF.Configuration;
 using CoreWCF.ConfigurationManager.Client;
 using System;
 using System.Configuration;

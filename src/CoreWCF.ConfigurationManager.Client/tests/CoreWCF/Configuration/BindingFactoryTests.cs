@@ -1,4 +1,5 @@
-﻿using CoreWCF.ConfigurationManager.Client;
+﻿using CoreWCF.Configuration;
+using CoreWCF.ConfigurationManager.Client;
 using System;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
@@ -11,10 +12,10 @@ namespace CoreWCF.ConfigurationManager.Client.Tests.CoreWCF.Configuration
         private readonly BindingFactory _factory = new BindingFactory();
 
         [Theory]
-        [InlineData("basicHttpBinding", typeof(BasicHttpBinding))]
-        [InlineData("netTcpBinding", typeof(NetTcpBinding))]
-        [InlineData("wsHttpBinding", typeof(WSHttpBinding))]
-        [InlineData("netHttpBinding", typeof(NetHttpBinding))]
+        [InlineData("basicHttpBinding", typeof(System.ServiceModel.BasicHttpBinding))]
+        [InlineData("netTcpBinding", typeof(System.ServiceModel.NetTcpBinding))]
+        [InlineData("wsHttpBinding", typeof(System.ServiceModel.WSHttpBinding))]
+        [InlineData("netHttpBinding", typeof(System.ServiceModel.NetHttpBinding))]
         [InlineData("customBinding", typeof(CustomBinding))]
         public void Create_ValidBindingType_ReturnsCorrectBinding(string bindingType, Type expectedType)
         {

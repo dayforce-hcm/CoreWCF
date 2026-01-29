@@ -10,6 +10,7 @@ using System.IdentityModel.Tokens;
 using System.Configuration;
 using System.Reflection;
 using SMEndpointAddress = System.ServiceModel.EndpointAddress;
+using CoreWCF.Configuration;
 
 namespace CoreWCF.ConfigurationManager.Client.Tests.CoreWCF.Configuration.Elements.Bindings.Properties.Security
 {

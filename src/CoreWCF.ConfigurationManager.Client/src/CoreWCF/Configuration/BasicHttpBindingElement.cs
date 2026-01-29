@@ -5,6 +5,7 @@ using System.Configuration;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using SMTransferMode = System.ServiceModel.TransferMode;
+using SMWSMessageEncoding = System.ServiceModel.WSMessageEncoding;
 
 namespace CoreWCF.ConfigurationManager.Client
 {
@@ -28,7 +29,7 @@ namespace CoreWCF.ConfigurationManager.Client
 
         public override Binding CreateBinding()
         {
-            var binding = new BasicHttpBinding(Security.Mode)
+            var binding = new System.ServiceModel.BasicHttpBinding(Security.Mode)
             {
                 Name = Name,
                 MaxReceivedMessageSize = MaxReceivedMessageSize,
@@ -49,7 +50,7 @@ namespace CoreWCF.ConfigurationManager.Client
             };
             if (!string.IsNullOrEmpty(MessageEncoding))
             {
-                binding.MessageEncoding = (WSMessageEncoding)System.Enum.Parse(typeof(WSMessageEncoding), MessageEncoding);
+                binding.MessageEncoding = (SMWSMessageEncoding)System.Enum.Parse(typeof(SMWSMessageEncoding), MessageEncoding);
             }
             Security.ApplyConfiguration(binding.Security);
             return binding;

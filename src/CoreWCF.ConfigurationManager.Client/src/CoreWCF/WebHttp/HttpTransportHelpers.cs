@@ -6,6 +6,8 @@ using System.Net;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using CoreWCF.Runtime;
+using SMHttpTransportSecurity = System.ServiceModel.HttpTransportSecurity;
+using SMHttpClientCredentialType = System.ServiceModel.HttpClientCredentialType;
 
 namespace CoreWCF.ConfigurationManager.Client
 {
@@ -13,15 +15,15 @@ namespace CoreWCF.ConfigurationManager.Client
     {
         private const string DefaultRealm = HttpTransportDefaults.Realm;
 
-        internal static void ConfigureTransportProtectionAndAuthentication(HttpsTransportBindingElement https, HttpTransportSecurity transportSecurity)
+        internal static void ConfigureTransportProtectionAndAuthentication(HttpsTransportBindingElement https, SMHttpTransportSecurity transportSecurity)
         {
             ConfigureAuthentication(https, transportSecurity);
-            https.RequireClientCertificate = (transportSecurity.ClientCredentialType == HttpClientCredentialType.Certificate);
+            https.RequireClientCertificate = (transportSecurity.ClientCredentialType == SMHttpClientCredentialType.Certificate);
         }
 
-        internal static void ConfigureTransportAuthentication(HttpTransportBindingElement http, HttpTransportSecurity transportSecurity)
+        internal static void ConfigureTransportAuthentication(HttpTransportBindingElement http, SMHttpTransportSecurity transportSecurity)
         {
-            if (transportSecurity.ClientCredentialType == HttpClientCredentialType.Certificate)
+            if (transportSecurity.ClientCredentialType == SMHttpClientCredentialType.Certificate)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.CertificateUnsupportedForHttpTransportCredentialOnly));
             }
@@ -34,36 +36,36 @@ namespace CoreWCF.ConfigurationManager.Client
             DisableAuthentication(http);
         }
 
-        private static void ConfigureAuthentication(HttpTransportBindingElement http, HttpTransportSecurity transportSecurity)
+        private static void ConfigureAuthentication(HttpTransportBindingElement http, SMHttpTransportSecurity transportSecurity)
         {
             http.AuthenticationScheme = MapToAuthenticationScheme(transportSecurity.ClientCredentialType);
             //http.Realm = transportSecurity.Realm;
             http.ExtendedProtectionPolicy = transportSecurity.ExtendedProtectionPolicy;
         }
 
-        private static AuthenticationSchemes MapToAuthenticationScheme(HttpClientCredentialType clientCredentialType)
+        private static AuthenticationSchemes MapToAuthenticationScheme(SMHttpClientCredentialType clientCredentialType)
         {
             AuthenticationSchemes result;
             switch (clientCredentialType)
             {
-                case HttpClientCredentialType.Certificate:
+                case SMHttpClientCredentialType.Certificate:
                 // fall through to None case
-                case HttpClientCredentialType.None:
+                case SMHttpClientCredentialType.None:
                     result = AuthenticationSchemes.Anonymous;
                     break;
-                case HttpClientCredentialType.Basic:
+                case SMHttpClientCredentialType.Basic:
                     result = AuthenticationSchemes.Basic;
                     break;
-                case HttpClientCredentialType.Digest:
+                case SMHttpClientCredentialType.Digest:
                     result = AuthenticationSchemes.Digest;
                     break;
-                case HttpClientCredentialType.Ntlm:
+                case SMHttpClientCredentialType.Ntlm:
                     result = AuthenticationSchemes.Ntlm;
                     break;
-                case HttpClientCredentialType.Windows:
+                case SMHttpClientCredentialType.Windows:
                     result = AuthenticationSchemes.Negotiate;
                     break;
-                case HttpClientCredentialType.InheritedFromHost:
+                case SMHttpClientCredentialType.InheritedFromHost:
                     result = AuthenticationSchemes.None;
                     break;
                 default:

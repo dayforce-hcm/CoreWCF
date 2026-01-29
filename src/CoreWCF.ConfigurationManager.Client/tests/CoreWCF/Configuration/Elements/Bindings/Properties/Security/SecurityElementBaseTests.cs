@@ -6,6 +6,7 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Security;
 using System.Text;
 using System.Xml;
+using CoreWCF.Configuration;
 using CoreWCF.ConfigurationManager.Client;
 using Xunit;
 

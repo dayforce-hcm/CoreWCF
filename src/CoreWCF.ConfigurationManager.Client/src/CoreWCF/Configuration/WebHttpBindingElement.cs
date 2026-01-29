@@ -9,6 +9,7 @@ using System.ServiceModel.Channels;
 using System.Text;
 using SMTransferMode = System.ServiceModel.TransferMode;
 using SMHostNameComparisonMode = System.ServiceModel.HostNameComparisonMode;
+using WebContentTypeMapper = CoreWCF.Channels.WebContentTypeMapper;
 
 namespace CoreWCF.ConfigurationManager.Client
 {

@@ -1,5 +1,5 @@
 using Xunit;
-using CoreWCF.ConfigurationManager.Client;
+using WebContentFormat = CoreWCF.Channels.WebContentFormat;
 
 namespace CoreWCF.ConfigurationManager.Elements.Bindings.WebHttp.Tests
 {

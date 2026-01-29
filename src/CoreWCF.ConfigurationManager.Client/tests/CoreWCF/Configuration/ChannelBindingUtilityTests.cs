@@ -1,3 +1,4 @@
+using CoreWCF.Channels;
 using CoreWCF.ConfigurationManager.Client;
 using System.Net;
 using System.Net.Security;

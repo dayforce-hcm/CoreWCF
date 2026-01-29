@@ -11,7 +11,8 @@ using System.Xml;
 using System.IdentityModel.Tokens;
 using System.ServiceModel.Security.Tokens;
 using CoreWCF.Runtime;
-using SMMessageSecurityVersion= System.ServiceModel.MessageSecurityVersion;
+using CoreWCF.Configuration;
+using SMMessageSecurityVersion = System.ServiceModel.MessageSecurityVersion;
 
 namespace CoreWCF.ConfigurationManager.Client
 {

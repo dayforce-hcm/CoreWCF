@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Configuration;
 using Xunit;
+using CoreWCF.Configuration;
+//using CoreWCF.Configuration;
 
 namespace CoreWCF.ConfigurationManager.Client.Tests.CoreWCF.Configuration.ExtensionElements
 {

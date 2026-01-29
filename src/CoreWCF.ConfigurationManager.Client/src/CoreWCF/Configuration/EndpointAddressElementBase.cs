@@ -3,6 +3,7 @@
 
 using System;
 using System.Configuration;
+using CoreWCF.Configuration;
 using SMEndpointAddress = System.ServiceModel.EndpointAddress;
 
 namespace CoreWCF.ConfigurationManager.Client

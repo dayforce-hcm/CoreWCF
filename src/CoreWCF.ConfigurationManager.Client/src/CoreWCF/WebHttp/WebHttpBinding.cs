@@ -3,6 +3,7 @@ using System.ServiceModel.Channels;
 using System.Text;
 using System.Xml;
 using SMTransferMode = System.ServiceModel.TransferMode;
+using WebContentTypeMapper = CoreWCF.Channels.WebContentTypeMapper;
 
 namespace CoreWCF.ConfigurationManager.Client
 {

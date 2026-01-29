@@ -6,17 +6,20 @@ using System.ComponentModel;
 using System.Configuration;
 using System.ServiceModel;
 using System.ServiceModel.Security;
+using CoreWCF.Configuration;
+using SMBasicHttpMessageSecurity = System.ServiceModel.BasicHttpMessageSecurity;
+using SMBasicHttpMessageCredentialType = System.ServiceModel.BasicHttpMessageCredentialType;
 
 namespace CoreWCF.ConfigurationManager.Client
 {
     public class BasicHttpMessageSecurityElement : ServiceModelConfigurationElement
     {
-        internal const BasicHttpMessageCredentialType DefaultClientCredentialType = BasicHttpMessageCredentialType.UserName;
+        internal const SMBasicHttpMessageCredentialType DefaultClientCredentialType = SMBasicHttpMessageCredentialType.UserName;
 
         [ConfigurationProperty(ConfigurationStrings.ClientCredentialType, DefaultValue = DefaultClientCredentialType)]
-        public BasicHttpMessageCredentialType ClientCredentialType
+        public SMBasicHttpMessageCredentialType ClientCredentialType
         {
-            get { return (BasicHttpMessageCredentialType)base[ConfigurationStrings.ClientCredentialType]; }
+            get { return (SMBasicHttpMessageCredentialType)base[ConfigurationStrings.ClientCredentialType]; }
             set { base[ConfigurationStrings.ClientCredentialType] = value; }
         }
 
@@ -28,7 +31,7 @@ namespace CoreWCF.ConfigurationManager.Client
             set { base[ConfigurationStrings.AlgorithmSuite] = value; }
         }
 
-        internal void ApplyConfiguration(BasicHttpMessageSecurity security)
+        internal void ApplyConfiguration(SMBasicHttpMessageSecurity security)
         {
             if (security == null)
             {

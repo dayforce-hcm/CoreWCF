@@ -4,6 +4,7 @@
 using System;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
+using CoreWCF.Configuration;
 
 namespace CoreWCF.ConfigurationManager.Client
 {
@@ -20,13 +21,13 @@ namespace CoreWCF.ConfigurationManager.Client
             switch (bindingType)
             {
                 case "basicHttpBinding":
-                    return new BasicHttpBinding();
+                    return new System.ServiceModel.BasicHttpBinding();
                 case "netTcpBinding":
-                    return new NetTcpBinding();
+                    return new System.ServiceModel.NetTcpBinding();
                 case "wsHttpBinding":
-                    return new WSHttpBinding();
+                    return new System.ServiceModel.WSHttpBinding();
                 case "netHttpBinding":
-                    return new NetHttpBinding();
+                    return new System.ServiceModel.NetHttpBinding();
                 case "customBinding":
                     return new CustomBinding();
                 default:

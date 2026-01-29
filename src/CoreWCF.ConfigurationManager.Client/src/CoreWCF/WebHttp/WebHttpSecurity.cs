@@ -4,6 +4,7 @@
 using System;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
+using SMHttpTransportSecurity = System.ServiceModel.HttpTransportSecurity;
 
 namespace CoreWCF.ConfigurationManager.Client
 {
@@ -11,11 +12,11 @@ namespace CoreWCF.ConfigurationManager.Client
     {
         internal const WebHttpSecurityMode DefaultMode = WebHttpSecurityMode.None;
         private WebHttpSecurityMode _mode;
-        private HttpTransportSecurity _transportSecurity;
+        private SMHttpTransportSecurity _transportSecurity;
 
         public WebHttpSecurity()
         {
-            _transportSecurity = new HttpTransportSecurity();
+            _transportSecurity = new SMHttpTransportSecurity();
         }
 
         public WebHttpSecurityMode Mode
@@ -35,12 +36,12 @@ namespace CoreWCF.ConfigurationManager.Client
 
         internal bool IsModeSet { get; private set; }
 
-        public HttpTransportSecurity Transport
+        public SMHttpTransportSecurity Transport
         {
             get { return _transportSecurity; }
             set
             {
-                _transportSecurity = (value == null) ? new HttpTransportSecurity() : value;
+                _transportSecurity = (value == null) ? new SMHttpTransportSecurity() : value;
             }
         }
 

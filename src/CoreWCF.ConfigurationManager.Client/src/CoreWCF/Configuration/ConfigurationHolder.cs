@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
+using CoreWCF.Configuration;
 
 namespace CoreWCF.ConfigurationManager.Client
 {

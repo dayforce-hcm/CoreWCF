@@ -3,6 +3,7 @@
 
 using System;
 using System.Configuration;
+using CoreWCF.Configuration;
 
 namespace CoreWCF.ConfigurationManager.Client
 {

@@ -5,6 +5,7 @@ using System;
 using System.Configuration;
 using System.Globalization;
 using System.Threading;
+using CoreWCF.Configuration;
 using CoreWCF.Runtime;
 
 namespace CoreWCF.ConfigurationManager.Client

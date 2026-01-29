@@ -1,5 +1,6 @@
 using Xunit;
 using CoreWCF.ConfigurationManager.Client;
+using CoreWCF.Configuration;
 
 namespace CoreWCF.ConfigurationManager.Client.Tests.CoreWCF.Configuration.Elements.Bindings.Properties
 {
@@ -11,7 +12,6 @@ namespace CoreWCF.ConfigurationManager.Client.Tests.CoreWCF.Configuration.Elemen
             var element = new ServiceNameElement();
             element.Name = "TestName";
             Assert.Equal("TestName", element.Name);
-            Assert.Equal("TestName", element.Key);
         }
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.ServiceModel;
 using Xunit;
+using SMBasicHttpBinding = System.ServiceModel.BasicHttpBinding;
 
 namespace CoreWCF.ConfigurationManager.Client.Tests.IntegrationTests.Bindings
 {
@@ -78,7 +79,7 @@ namespace CoreWCF.ConfigurationManager.Client.Tests.IntegrationTests.Bindings
                 Assert.NotNull(endpoint);
                 Assert.Equal(EndpointAddress, endpoint.Address.Uri.ToString());
                 Assert.Equal(BindingName, endpoint.Binding.Name, true);
-                var basicHttpBinding = endpoint.Binding as BasicHttpBinding;
+                var basicHttpBinding = endpoint.Binding as SMBasicHttpBinding;
                 Assert.NotNull(basicHttpBinding);
                 Assert.Equal(maxBufferSize, basicHttpBinding.MaxBufferSize);
                 Assert.Equal(maxReceivedMessageSize, basicHttpBinding.MaxReceivedMessageSize);
@@ -154,7 +155,7 @@ namespace CoreWCF.ConfigurationManager.Client.Tests.IntegrationTests.Bindings
                 Assert.NotNull(endpoint);
                 Assert.Equal(EndpointAddress, endpoint.Address.Uri.ToString());
                 Assert.Equal(BindingName, endpoint.Binding.Name, true);
-                var basicHttpBinding = endpoint.Binding as BasicHttpBinding;
+                var basicHttpBinding = endpoint.Binding as SMBasicHttpBinding;
                 Assert.NotNull(basicHttpBinding);
                 Assert.Equal(maxBufferSize, basicHttpBinding.MaxBufferSize);
                 Assert.Equal(maxReceivedMessageSize, basicHttpBinding.MaxReceivedMessageSize);
@@ -262,7 +263,7 @@ namespace CoreWCF.ConfigurationManager.Client.Tests.IntegrationTests.Bindings
                 Assert.NotNull(endpoint);
                 Assert.Equal(EndpointAddress, endpoint.Address.Uri.ToString());
                 Assert.Equal(BindingName, endpoint.Binding.Name, true);
-                var basicHttpBinding = endpoint.Binding as BasicHttpBinding;
+                var basicHttpBinding = endpoint.Binding as SMBasicHttpBinding;
                 Assert.NotNull(basicHttpBinding);
                 var quotas = basicHttpBinding.ReaderQuotas;
                 Assert.NotNull(quotas);
