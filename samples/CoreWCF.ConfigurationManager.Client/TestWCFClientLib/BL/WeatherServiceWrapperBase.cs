@@ -1,4 +1,10 @@
-﻿namespace TestWCFClientApp
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
+using TestWCFClientLib.WeatherService;
+
+namespace TestWCFClientLib.BL
 {
     public class WeatherServiceWrapperBase : IDisposable
     {
@@ -9,16 +15,19 @@
         public WeatherServiceWrapperBase(string endpointConfigurationName)
         {
             weatherServiceClient = new WeatherServiceClient(endpointConfigurationName);
+
         }
 
         public WeatherServiceWrapperBase(string endpointConfigurationName, string remoteAddress)
         {
             weatherServiceClient = new WeatherServiceClient(endpointConfigurationName, remoteAddress);
+
         }
 
         public WeatherServiceWrapperBase(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress)
         {
             weatherServiceClient = new WeatherServiceClient(binding, remoteAddress);
+
         }
 
         public WeatherServiceWrapperBase(System.ServiceModel.Description.ServiceEndpoint endpoint)

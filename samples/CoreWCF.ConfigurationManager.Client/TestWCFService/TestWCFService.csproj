@@ -31,4 +31,7 @@
 		<Reference Include="System.Web.Extensions" />
 		<Reference Include="System.Web.Services" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TestWCFServiceLib\TestWCFServiceLib.csproj" />
+  </ItemGroup>
 </Project>

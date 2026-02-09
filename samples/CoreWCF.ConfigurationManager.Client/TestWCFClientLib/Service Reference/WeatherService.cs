@@ -8,14 +8,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TestWCFClientApp
+namespace TestWCFClientLib.WeatherService
 {
     using System.Runtime.Serialization;
 
 
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name = "WeatherForecast", Namespace = "http://schemas.datacontract.org/2004/07/TestWCFService.Models")]
+    [System.Runtime.Serialization.DataContractAttribute(Name = "WeatherForecast", Namespace = "http://schemas.datacontract.org/2004/07/TestWCFServiceLib.Models")]
     public partial class WeatherForecast : object, System.Runtime.Serialization.IExtensibleDataObject
     {
 
@@ -113,23 +113,34 @@ namespace TestWCFClientApp
         {
         }
 
-        public WeatherServiceClient(string endpointConfigurationName) :
-                base(endpointConfigurationName)
+        public WeatherServiceClient(string endpointConfigurationName)
+#if NETFRAMEWORK
+            : base(endpointConfigurationName)
+#endif
         {
         }
 
-        public WeatherServiceClient(string endpointConfigurationName, string remoteAddress) :
-                base(endpointConfigurationName, remoteAddress)
+        public WeatherServiceClient(string endpointConfigurationName, string remoteAddress)
+#if NETFRAMEWORK
+             : base(endpointConfigurationName, remoteAddress)
+#endif
         {
         }
 
-        public WeatherServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) :
-                base(endpointConfigurationName, remoteAddress)
+        public WeatherServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress)
+#if NETFRAMEWORK
+            : base(endpointConfigurationName, remoteAddress)
+#endif
         {
         }
 
         public WeatherServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) :
                 base(binding, remoteAddress)
+        {
+        }
+
+        public WeatherServiceClient(System.ServiceModel.Description.ServiceEndpoint endpoint) :
+                base(endpoint)
         {
         }
 

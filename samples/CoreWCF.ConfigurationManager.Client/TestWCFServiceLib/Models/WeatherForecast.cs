@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace TestWCFService.Models
+namespace TestWCFServiceLib.Models
 {
     [DataContract]
     public partial class WeatherForecast

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TestWCFService.Models;
+using TestWCFServiceLib.Models;
 
-namespace TestWCFService
+namespace TestWCFServiceLib.BL
 {
     public class WeatherServiceLib
     {

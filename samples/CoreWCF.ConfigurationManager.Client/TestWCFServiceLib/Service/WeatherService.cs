@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TestWCFService.Models;
+using TestWCFServiceLib.BL;
+using TestWCFServiceLib.Models;
 
-namespace TestWCFService
+namespace TestWCFServiceLib.Service
 {
     public class WeatherService : IWeatherService
     {

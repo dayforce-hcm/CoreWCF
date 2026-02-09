@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
-using TestWCFService.Models;
+using TestWCFServiceLib.Models;
 
-namespace TestWCFService
+namespace TestWCFServiceLib.Service
 {
     [ServiceContract]
     public interface IWeatherService

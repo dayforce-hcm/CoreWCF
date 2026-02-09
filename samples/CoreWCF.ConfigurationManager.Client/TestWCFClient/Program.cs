@@ -3,7 +3,8 @@ using System.Configuration;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Configuration;
-
+using TestWCFClientLib.BL;
+using TestWCFClientLib.WeatherService;
 
 namespace TestWCFClientApp
 {
