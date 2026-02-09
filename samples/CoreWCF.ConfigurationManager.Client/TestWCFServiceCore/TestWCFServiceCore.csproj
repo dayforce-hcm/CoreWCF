@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+	  <IncludeCommonCode>false</IncludeCommonCode>
+    <UserSecretsId>25966b5b-fbcb-45b7-a7f2-6c1b89e0659c</UserSecretsId>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\CoreWCF.ConfigurationManager\src\CoreWCF.ConfigurationManager.csproj" />
+    <ProjectReference Include="..\..\..\src\CoreWCF.Http\src\CoreWCF.Http.csproj" />
+    <ProjectReference Include="..\TestWCFServiceLib\TestWCFServiceLib.csproj" />
+  </ItemGroup>
+  <Import Project="..\..\..\src\CoreWCF.ConfigurationManager\src\CoreWCF.ConfigurationManager.targets" Condition="Exists('..\..\..\src\CoreWCF.ConfigurationManager\src\CoreWCF.ConfigurationManager.targets')" />
+  <ItemGroup>
+    <_CoreWCFConfigFiles Remove="@(_CoreWCFConfigFiles)" />
+    <_CoreWCFConfigFiles Include="..\..\..\src\CoreWCF.ConfigurationManager\src\CoreWCF.machine.config" />
+  </ItemGroup>
+</Project>
